@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*
+            position : static | absolute | relative | fixed
+        */
+        body {
+            height: 1600px;
+        }
+        .play-box {
+            position: relative;
+            border: 1px solid #3455;
+            width: 300px;
+            height: 200px;
+            margin: 20px;
+            /* top: 50px;
+            left: 50px;  */
+        }
+        .play-box-time {
+            position: absolute;
+            border: 1px solid #3455;
+            width: 80px;
+            right: 5px;
+            bottom: 5px;
+        }
+        .chat-message {
+            position: fixed;
+            z-index: 1;
+            width: 200px;
+            height: 300px;
+            border: 5px solid #333;
+            top: 200px;
+            left: 300px;
+            background: white;
+        }
+
+        .chat-messag-close {
+            position: absolute;
+            right: 0; 
+            width: 24px;
+            height: 24px;
+            background-color: black;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-message">
+        <div class="chat-messag-close">X</div>
+    </div>
+    <div class="play-box">
+        <div class="play-box-time">11:20:22</div>
+   
+    </div>
+    <div class="play-box">
+        <div class="play-box-time">04:10:22</div>
+ 
+    </div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+

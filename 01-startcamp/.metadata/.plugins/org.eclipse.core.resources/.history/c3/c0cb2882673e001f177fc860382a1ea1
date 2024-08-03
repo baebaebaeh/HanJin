@@ -1,0 +1,19 @@
+spackage com.ssafy.class1;
+
+public class Test03_Comment {
+	public static void main(String[] args) {
+		// System.out.println(1);
+		System.out.println(2);  /* */
+		
+		/* String name = "주석문 연습";
+		System.out.println(1);
+		System.out.println(2);
+		*/
+	}
+	public /* static  */ void a() {}
+}
+
+
+
+
+

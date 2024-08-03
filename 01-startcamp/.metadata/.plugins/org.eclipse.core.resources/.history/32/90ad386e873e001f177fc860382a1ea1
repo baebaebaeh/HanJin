@@ -1,0 +1,34 @@
+package com.ssafy.class1;
+
+import java.util.Random;
+
+/*
+ class : 
+ method : 
+ variable :
+ constant : 
+ */
+
+public class Test06_ClassType {
+	public static void main(String[] args) {
+		Member m = new Member();
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

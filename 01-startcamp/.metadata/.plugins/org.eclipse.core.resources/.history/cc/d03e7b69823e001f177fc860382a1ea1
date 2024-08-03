@@ -1,0 +1,9 @@
+package com.ssafy.class1;
+
+public class Test06_ClassType {
+	
+	
+	public static void main(String[] args) {
+		
+	}
+}

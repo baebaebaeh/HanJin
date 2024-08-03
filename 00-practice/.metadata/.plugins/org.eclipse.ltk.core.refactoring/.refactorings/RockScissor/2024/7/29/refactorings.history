@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy package &apos;com.ssafy.hw&apos; to &apos;RockScissor/src/com.ssafy.hw&apos;&#x0D;&#x0A;- Original project: &apos;RockScissor&apos;&#x0D;&#x0A;- Destination element: &apos;RockScissor/src/com.ssafy.hw&apos;&#x0D;&#x0A;- Original element: &apos;RockScissor/src/com.ssafy.hw&apos;" description="Copy package" destination="/src&lt;com.ssafy.hw" element1="/src&lt;com.ssafy.hw" flags="589830" fragments="1" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyPackages" stamp="1721170472522" version="1.0"/>
+</session>

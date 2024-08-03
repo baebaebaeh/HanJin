@@ -1,0 +1,25 @@
+package RSP;
+
+public class RockScissorPapper {
+	public static void main(String[] args) {
+		int lineFirstNum = 1;
+		for (int lineIter = 5, A = 0; lineIter >= -7; lineIter -= 2, A++) {
+			System.out.print(" ".repeat(A * 4));
+			if (lineIter > 1 | lineIter < 1) {
+				for (int i = lineFirstNum, k = Math.abs(lineIter); k > 0; k--, i++) {
+					System.out.printf("%-4d", i);
+				}
+				lineFirstNum += Math.abs(lineIter);
+				System.out.println();
+			} else if (lineIter == 1) {
+			lineIter -= 2;
+			for (int lineIter1 = 5, A1 = 0; lineIter1 >= -7; lineIter1 -= 2, A1++) {
+				for (int i = lineFirstNum, k = Math.abs(lineIter1); k > 0; k--, i++) {
+					System.out.printf("%-4d", i);
+				}
+				lineFirstNum += Math.abs(lineIter1);
+				System.out.println();
+			}
+		}
+	}
+}

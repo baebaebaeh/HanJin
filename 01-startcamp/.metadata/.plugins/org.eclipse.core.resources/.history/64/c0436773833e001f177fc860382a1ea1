@@ -1,0 +1,14 @@
+package com.ssafy.class1;
+
+import java.util.Random;
+
+public class Test06_ClassType {
+	public static void main(String[] args) {
+		int i = Integer.parseInt("100");
+		int j = Integer.MAX_VALUE;
+		
+		Random r = new Random();
+		int k = r.nextInt();
+		System.out.println(i + j + k);
+	}
+}

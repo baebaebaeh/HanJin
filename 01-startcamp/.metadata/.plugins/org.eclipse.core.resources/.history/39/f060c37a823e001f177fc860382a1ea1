@@ -1,0 +1,9 @@
+package com.ssafy.class1;
+class Member {}
+public class Test06_ClassType {
+	
+	
+	public static void main(String[] args) {
+		
+	}
+}

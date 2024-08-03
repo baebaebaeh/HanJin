@@ -1,0 +1,24 @@
+package RSP;
+
+import java.util.Scanner;
+
+public class FindingDay {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("월과 일을 입력하세요.");
+		int month = sc.nextInt();
+		int day = sc.nextInt();
+		int datMon = 0;
+		if (month % 2 == 0) {
+			int datMonth = ((month-2)/2)*30+28;
+			datMon = datMonth;
+		}
+		else {
+			int datMonth = ((month+1)/2)*31;
+			datMon = datMonth;
+		}
+		int date = day + datMon;
+		System.out.println(date);
+	}
+
+}

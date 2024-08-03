@@ -1,0 +1,4 @@
+cd existing_repo
+git remote add origin https://lab.ssafy.com/bae9954/hanjin.git
+git branch -M master
+git push -uf origin master

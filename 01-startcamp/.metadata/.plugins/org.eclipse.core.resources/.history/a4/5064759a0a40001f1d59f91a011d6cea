@@ -1,0 +1,55 @@
+package com.ssafy.chatgpt;
+
+public class ChatGPTTest {
+
+	   private static String API_KEY = "????";
+	   private static String GPT_URL = "https://api.openai.com/v1/chat/completions";
+
+	   public static void main(String[] args) throws IOException {
+	      URL url = new URL(GPT_URL);
+	      HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+	      
+	      connection.setRequestMethod("POST");
+	      connection.setRequestProperty("Content-Type", "application/json");
+	      connection.setRequestProperty("Authorization", "Bearer " + API_KEY);
+	      connection.setDoInput(true);
+	      connection.setDoOutput(true);
+	      
+	      JSONObject data = new JSONObject();
+	      data.put("model", "gpt-3.5-turbo");
+//	      data.put("temperature", 0.7);
+	      
+	      JSONObject message = new JSONObject();
+	      message.put("role", "user");
+	      message.put("content", "안녕? Chat GPT에 대해 자세하게 소개해줘.");
+	      System.out.println(message);
+	      
+	      JSONArray messages = new JSONArray();
+	      messages.put(message);
+	      System.out.println(messages);
+	      
+	      data.put("messages", messages);
+	      System.out.println(data);
+	      
+	      BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
+	      bw.write(data.toString());
+	      bw.flush();
+	      bw.close();
+	      
+	      BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+	      StringBuilder sb = new StringBuilder();
+	      String line = null;
+	      
+	      while ((line = br.readLine()) != null) {
+	         sb.append(line);
+	      }
+	      System.out.println(sb.toString());
+	      
+	      JSONObject result = new JSONObject(sb.toString());
+	      JSONArray obj = (JSONArray)result.get("choices");
+	      JSONObject resultData = (JSONObject)obj.get(0);
+	      System.out.println(resultData.get("message"));
+	      JSONObject messageData = (JSONObject)resultData.get("message");
+	      System.out.println(messageData.get("content"));
+	   }
+	}
