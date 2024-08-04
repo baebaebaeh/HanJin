@@ -13,7 +13,7 @@ public class num8320 {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringTokenizer st1 = new StringTokenizer(br.readLine());
 		int L = Integer.parseInt(st1.nextToken());
-		int max = (int) Math.sqrt(L);
+		int max = (int) Math.sqrt(L); // 루트씌우고 나머지 버림
 		int sum = 0;
 		for (int i = max; i > 0; i--) {
 			sum += ((L / i) - i + 1);

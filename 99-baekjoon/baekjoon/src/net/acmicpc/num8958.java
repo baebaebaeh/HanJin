@@ -23,8 +23,8 @@ public class num8958 {
 			int contin = 1;
 			int a = s.length();
 			while (j < a) {
-				if (s.charAt(j) == 'O') {
-					ans += contin++;
+				if (s.charAt(j) == 'O') { // 현재가 O일때
+					ans += contin++; // 처음에는 +1 연속해서 O가 나오면 +2 +3 ...
 					j++;
 					continue;
 				}
