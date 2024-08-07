@@ -9,9 +9,9 @@ import java.io.OutputStreamWriter;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-class swea0000 {
+class swea1984 {
 	public static void main(String args[]) throws IOException {
-		System.setIn(new FileInputStream("swea/input1961.txt"));
+		System.setIn(new FileInputStream("swea/input1984.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringTokenizer st = new StringTokenizer(br.readLine());
