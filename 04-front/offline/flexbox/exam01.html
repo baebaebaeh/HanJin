@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가운데 위치 시키기</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            /*
+            align-contant 는 여러줄이 교차축으로 되어있으면 사용 가능하다.
+            */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 10px solid #5555;
+            background-color: beige;
+            height: 100vh;
+        }
+        .login--box{
+            border: 1px solid #3335;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login--box">
+        <h2>로그인</h2>
+        <div>
+            <label>ID : </label>
+            <input type="text" />
+        </div>
+        <div>
+            <label>PASS : </label>
+            <input type="password" />
+        </div>
+        <div>
+            <button>Login</button>
+        </div>
+    </div>
+    
+</body>
+</html>
