@@ -10,11 +10,12 @@
         }
 
         .flex-container {
-            width: 300px;
+            width: 800px;
             height: 300px;
             background: silver;
             border: 5px solid black;
             color: white;
+            display: flex;
         }
         .flex-container > div {
             font-size: 30px;
@@ -24,20 +25,13 @@
             height: 80px;
             margin: 2px;
         }
-        .flex-container{
-          width: 800px;
-          flex-direction: row;
-          display: inline-flex;
-          display: flex;
-          justify-content: flex-start; 
-          justify-content: flex-end;
-          justify-content: center;
-          justify-content: space-between;
-          justify-content: space-around;
-          justify-content: space-evenly;
-          align-items: flex-start;
-          align-items: flex-end;
-          align-items: center;
+        /* 특정한 아이템이 남아있는 여백을 꽉 채우고 싶다. (남아있는 여백이 없으면 안됨.) */
+        /* (남은 여백 / grow의 갯수(현재 2)) 를 현재 길이에 추가로 더해줌*/
+        .grow{
+          flex-grow: 1;
+        }
+        .big-grow {
+          flex-grow: 3;
         }
     </style>
   </head>
@@ -45,9 +39,9 @@
     <div class="container">
       <div class="flex-container">
         <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
+        <div class="grow">2</div>
+        <div class="grow">3</div>
+        <div class="big-grow">4</div>
         <div>5</div>
       </div>
   </body>

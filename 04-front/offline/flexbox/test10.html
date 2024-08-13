@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .flex-container {
+            width: 300px;
+            height: 300px;
+            background: silver;
+            border: 5px solid black;
+            color: white;
+            display: flex;
+            width: 600px;
+            align-items: center;
+        }
+        .flex-container > div {
+            font-size: 30px;
+            text-align: center;
+            background: #112233;
+            width: 80px;
+            height: 80px;
+            margin: 2px;
+            /*
+            flex : flex-grow, flex-shrink, flex-basis 
+            */
+            /* 부모보다 작아도 늘리지는 말고 부모보다 크면 줄여라 기본크기는 이렇게 해라 */
+            /* 만약 아이템이 컨테이너의 크기보다 커졌다면 컨테이너 크기에 맞게 줄어들어라. */
+            flex: 0 1 200px;
+            /* 늘어나지도 말고 줄이지도 말고 그냥 200px을 가지고 있어라 */
+            flex: 0 0 200px;
+            /*  */
+            flex: 1 0 auto;
+        }
+        .self {
+          /* 특정한 아이템에만 교차축 정렬에서 따로 정렬하고 싶을때 사용 */
+          align-self: flex-start;
+          align-self: flex-end;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="flex-container">
+        <div>1</div>
+        <div>2</div>
+        <div class="self">3</div>
+        <div>4</div>
+        <div>5</div>
+      </div>
+    </div>
+  </body>
+</html>
+<!-- 
+flex-container
+  display: flex | inline-flex;
+  flex-direction: row | colunm;
+  flex-wrap: no-wrap | wrap | wrap-reverse;
+  flex-flow : dirction wrap
+
+  ex) flex-flow : row wrap
+  두가지 속성을 같이 쓸대 flexflow
+
+  justify-content : flex-start | flex-end | center | space-b, e, a
+  align-items : flex-start | flex-end | center | baseline | stretch
+
+  사용조건 : flex-wrap
+  align-content : flex-start | flex-end | center | space-b, e, a
+
+
+  flex-item
+  order
+  flex-basis
+  flex-grow
+  flex-shrink
+  flex
+  align-self 
+-->

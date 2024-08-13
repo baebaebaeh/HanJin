@@ -1,4 +1,4 @@
-package com.swea.google;
+package com.swea.day10;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -6,32 +6,28 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.StringTokenizer;
 
-class swea2007 {
+class swea1873 {
 	public static void main(String args[]) throws IOException {
-		System.setIn(new FileInputStream("swea/input2007.txt"));
+		System.setIn(new FileInputStream("swea/input1873.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		Queue<Character> queue = new LinkedList<>();
+		
 		int T = Integer.parseInt(br.readLine());
-		String str = br.readLine();
-		int firstChar = str.charAt(0);
-		int tempIdx = 0;
 		for (int iter = 1; iter <= T; iter++) {
-			for (int i = 1; i < 30; i++) {
-				if (firstChar == str.charAt(i)) {
-					tempIdx = i;
-					for (int j = 0; j < 30 - i; j++) {
-//						str.charAt(tempIdx + j)
-					}
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int H = Integer.parseInt(st.nextToken());
+			int W = Integer.parseInt(st.nextToken());
+			char[][] map = new char[H][W];
+			for (int i = 0; i < H; i++) {
+				String string = br.readLine();
+				for (int j = 0; j < W; j++) {
+					map[i][j] = string.charAt(j);
 				}
 			}
 		}
+		
 //		bw.write("#" + iter + " " + ans + "\n");
 //		bw.flush();
 	}
