@@ -17,21 +17,13 @@ class swea1984 {
 		int T = Integer.parseInt(br.readLine());
 		for (int iter = 1; iter <= T; iter++) {
 			StringTokenizer st = new StringTokenizer(br.readLine());
+			int min = 0;
 			int max = 0;
-			int min = 10000;
-			int sum = 0;
 			for (int i = 0; i < 10; i++) {
-				int now = Integer.parseInt(st.nextToken());
-				sum += now;
-				if (now > max) max = now;
-				if (now < min) min = now;
 			}
-			sum = sum - (max + min);
-			int ans = sum / 8;
-			if (sum % 8 >= 4) ans += 1;
-			bw.write("#" + iter + " " + ans + "\n");
 		}
-		bw.flush();
+		
+		
 //		bw.write("#" + iter + " " + ans + "\n");
 //		bw.flush();
 	}
