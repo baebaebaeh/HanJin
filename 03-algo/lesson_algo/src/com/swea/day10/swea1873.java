@@ -9,6 +9,12 @@ import java.io.OutputStreamWriter;
 import java.util.StringTokenizer;
 
 class swea1873 {
+	static int[] dr = {-1, 1, 0, 0};
+	static int[] dc = {0, 0, -1, 1};
+	static int d = 0;
+	static int nowR = 0;
+	static int nowC = 0;
+	
 	public static void main(String args[]) throws IOException {
 		System.setIn(new FileInputStream("swea/input1873.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -24,6 +30,18 @@ class swea1873 {
 				String string = br.readLine();
 				for (int j = 0; j < W; j++) {
 					map[i][j] = string.charAt(j);
+					if (map[i][j] == '^' || map[i][j] == 'v' || 
+							map[i][j] == '<' || map[i][j] == '>') {
+						nowR = i;
+						nowC = j;
+					}
+				}
+			}
+			String string = br.readLine();
+			for (int i = 0; i < string.length(); i++) {
+				if (string.charAt(i) == 'U') {
+					d = 0;
+					if (nowR + dr[d] < 0 || H <= nowR + dr[d]);
 				}
 			}
 		}
