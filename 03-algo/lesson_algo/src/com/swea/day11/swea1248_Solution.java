@@ -82,7 +82,10 @@ public class swea1248_Solution {
                         node[c] = new Node();
                     node[c].setParent(p);
                 }
-                 
+                
+                // 여기까지 노드끼리의 관계 저장
+                
+                
                 boolean bArr[] = new boolean[V+1];
                  
                 int index = node[A].getParent();

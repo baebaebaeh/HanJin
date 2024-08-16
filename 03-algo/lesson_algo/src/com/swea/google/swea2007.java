@@ -16,23 +16,28 @@ class swea2007 {
 		System.setIn(new FileInputStream("swea/input2007.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		Queue<Character> queue = new LinkedList<>();
 		int T = Integer.parseInt(br.readLine());
-		String str = br.readLine();
-		int firstChar = str.charAt(0);
-		int tempIdx = 0;
-		for (int iter = 1; iter <= T; iter++) {
-			for (int i = 1; i < 30; i++) {
+		out2 : for (int iter = 1; iter <= T; iter++) {
+ 			String str = br.readLine();
+			int firstChar = str.charAt(0);
+			int i = 0;
+			out: for (i = 1; i < 30; i++) {
+				if (firstChar != str.charAt(i))
+					continue;
 				if (firstChar == str.charAt(i)) {
-					tempIdx = i;
-					for (int j = 0; j < 30 - i; j++) {
-//						str.charAt(tempIdx + j)
+					for (int j = 0; j < i; j++) {
+						if (i + j >= 30) {
+							bw.write("#" + iter + " 0" + "\n");
+							continue out2;							
+						}
+						if (str.charAt(i + j) != str.charAt(j))
+							continue out;
 					}
 				}
+				break;
 			}
+			bw.write("#" + iter + " " + i + "\n");
 		}
-//		bw.write("#" + iter + " " + ans + "\n");
-//		bw.flush();
+		bw.flush();
 	}
 }
