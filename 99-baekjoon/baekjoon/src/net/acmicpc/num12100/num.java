@@ -1,4 +1,4 @@
-package net.acmicpc2;
+package net.acmicpc.num12100;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -9,11 +9,6 @@ import java.io.OutputStreamWriter;
 import java.util.StringTokenizer;
 
 public class num {
-	//long beforeTime = System.currentTimeMillis(); //코드 실행 전에 시간 받아오기
-	////실험할 코드 추가   
-	//long afterTime = System.currentTimeMillis(); // 코드 실행 후에 시간 받아오기
-	//long secDiffTime = (afterTime - beforeTime); //두 시간에 차 계산
-	//System.out.println("시간차이(m) : "+secDiffTime);
 	public static void main(String[] args) throws IOException {
 		System.setIn(new FileInputStream("data/input8958.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

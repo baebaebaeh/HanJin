@@ -1,0 +1,25 @@
+3
+0 16 0
+16 8 8
+0 0 0
+
+
+
+
+
+
+
+
+
+16
+
+
+
+
+
+
+
+
+			for (Node a : node) {
+			System.out.println(a.toString());
+			}

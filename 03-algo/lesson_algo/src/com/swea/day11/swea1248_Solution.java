@@ -50,6 +50,7 @@ public class swea1248_Solution {
         try {
             //FileInputStream is = new FileInputStream("input1248.txt");
             //DataInputStream dis = new DataInputStream(is);
+        	System.setIn(new FileInputStream("swea/input1248.txt"));
             InputStreamReader is = new InputStreamReader(System.in);
             BufferedReader dis = new BufferedReader(is);
              
