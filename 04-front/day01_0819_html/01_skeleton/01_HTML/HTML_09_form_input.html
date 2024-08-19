@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>form과 input</title>
+  <link rel="stylesheet" href="./assets/css/table.css">
+</head>
+<body>
+  <h2>form과 input</h2>
+  <!-- 
+  form태그는 사용자의 입력값을 처리할 때 사용
+  검색할때 검색어를 서버로 보낼 때 사용
+  action은 사용자가 입력한 내용을 어디로 보낼지 (처리할 서버 페이지 주소)
+  method는 어떤 방식으로 데이터를 보낼지 -> POST | GET
+  GET은 url에 데이터를 붙여서 보냄
+  http://127.0.0.1:5500/day01_0819_html/01_skeleton/01_HTML/dumy?name=sam&location=together&story=
+  POST는 url에 안 붙인다.
+  http://127.0.0.1:5500/day01_0819_html/01_skeleton/01_HTML/dumy
+  post가 get보다 조금 더 보안이 좋을 뿐이지 완벽하지 않다.
+  http는 데이터를 그냥 보내버려서 post도 유출 가능성이 존재한다.
+  https는 데이터를 암호화 해서 보낸다.
+  -->
+  <form action="dumy" 
+        method="post" 
+        name="ssafy" 
+        target="_blank">
+    <label for="name">이름:</label>
+    <input type="text" name="name" id="name" placeholder="이름을 작성하세요.">
+    <button>전송</button>
+
+    <select name="location" id="location">
+      <option value="">서울</option>
+      <option value="">대전</option>
+      <option value="together" selected>우리는 하나</option>
+    </select>
+    
+    <fieldset>
+      <legend>나의 이야기:</legend>
+      <textarea name="story" id="story" cols="30" rows="2" placeholder="'피승빈'을 구글에 검색해보세요"></textarea>
+    </fieldset>
+  </form>
+</body>
+</html>
