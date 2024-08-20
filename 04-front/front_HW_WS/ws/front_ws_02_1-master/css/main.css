@@ -1,0 +1,80 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+header {
+  display: flex;
+  height: 60px;
+  background-color: #03dbfc;
+  align-items: center;
+  /* 아래로만 쓰면 모두가 떨어짐 그래서 a를 div로 묶어줌 (그냥 묶어주는 역할이니까 div사용) */
+  justify-content: space-between;
+}
+.logo {
+  margin-left: 20px;
+}
+#searchBox > input {
+  width: 300px;
+  padding-left: 6px;
+  height: 16px;
+  font-size: 0.8em;
+}
+header > nav > a {
+  margin-right: 20px;
+}
+header > nav > a:last-child {
+  margin-right: 20px;
+}
+.btn {
+  width: 60px;
+  height: 22px;
+  font-weight: bold;
+}
+/* MAIN AREA */
+main > h1 {
+  /* rem은 root의 폰트크기를 기준으로 1.6배로 주겠다. */
+  font-size: 1.6rem;
+}
+.fs-2 {
+  font-size: 1.2rem;
+}
+main > .content {
+  display: flex;
+}
+main > .content > .car-like-area {
+  width: 300px;
+}
+main > .content > .car-info-area {
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+main > .content > .car-info-area > li {
+list-style: none;
+width: 40%;
+height: 500px;
+}
+main > .content > .car-info-area > li > .car-info-desc-area{
+  position: relative;
+}
+main > .content > .car-info-area > li > .car-info-desc-area > button{
+  position: absolute;
+  right: 30px;
+  top: 30px;
+}
+main > .content > ul {
+  flex-grow: 1;
+}
+/* FOOTER AREA */
+footer {
+  display: flex;
+  height: 60px;
+  background-color: #03dbfc;
+  align-items: center;
+  /* 아래로만 쓰면 모두가 떨어짐 그래서 a를 div로 묶어줌 (그냥 묶어주는 역할이니까 div사용) */
+  justify-content: center;
+}
+footer > a {
+  margin-right: 20px;
+}

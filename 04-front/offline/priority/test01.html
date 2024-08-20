@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* element 2점 (body부터 div까지 드래그해서 보면 알 수 있다.)*/
+        body > div {
+            background: green;
+        }
+        /* element 1점 (이 스타일은 아래에서 선언되었지만 점수가 낮기 때문에 green이 적용됨)*/
+        div {
+            background: yellow;
+        }
+        /* class와 element 11점 */
+        div.class1 {
+            background: red;
+        }
+        /* class 10점 (즉 같은 점수일때 나중에 쓴 코드가 적용됨을 알 수 있다.)*/
+        .class1 {
+            background: pink;
+        }
+        #id1 {
+            background: #1233;
+        }
+        /* 특성선택자도 10점 이다. */
+        [title] {
+            background: aqua;
+        }
+        /* 시작 ^ 포함 * 끝 $ */
+        [title ^= "abcd"] {
+            background: aqua;
+        }
+    </style>
+</head>
+<body>
+    <div title="abcd">
+        우선순위 연습하기
+    </div>
+    <div>
+        !important > inline > #id > .class > element > *
+    </div>
+    <div>
+        동일한 우선순위일 경우 나중에 선언된 것으로 적용
+    </div>
+    <div class = "class1">
+        동일한 우선순위일 경우 나중에 선언된 것으로 적용
+    </div>
+    <div id="id1" class="class1" style="background: blue;">
+        동일한 우선순위일 경우 나중에 선언된 것으로 적용
+    </div>
+    <div id="id1" class="class1">
+        동일한 우선순위일 경우 나중에 선언된 것으로 적용
+    </div>
+</body>
+</html>
