@@ -27,12 +27,13 @@ public class num17822 {
 				map[i][j] = Integer.parseInt(st.nextToken());
 			}
 		}
+		System.out.println(Arrays.deepToString(map));
 		st = new StringTokenizer(br.readLine());
 		int x = Integer.parseInt(st.nextToken()); // 배수
 		int d = Integer.parseInt(st.nextToken()); // 방향
 		int k = Integer.parseInt(st.nextToken()); // 몇번
 		
-		if (d == 1) {
+		if (d == 0) {
 			k = N - k;
 		}
 		int temp = 0;
