@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>아이디</th>
+            <th>나이</th>
+        </tr>
+        <tr>
+            <td>sbc</td>
+            <td>26</td>
+        </tr>
+    </table>
+    <script>
+        let id = "sbc";
+        let age = 26;
+        let html2 = `
+    <table>
+        <tr>
+            <th>아이디</th>
+            <th>나이</th>
+        </tr>
+        <tr>
+            <td>${id}</td>
+            <td>${age}</td>
+        </tr>
+    </table>
+        `;
+        console.log(html2);
+        // 제 아이디는 sbc이고 나이는 26살 입니다.
+        // 나이는 26살 입니다.
+        console.log("제 아이디는" + id + "이고 나이는 " + age + " 입니다.")
+    </script>
+</body>
+</html>

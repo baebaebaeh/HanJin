@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>03_background</title>
+    <style>
+      .background {
+        width: 800px;
+        height: 300px;
+        /* background-color */
+        background-color: skyblue;
+
+        /* background-image */
+        background-image: url('./assets/img/dixon.png');
+
+        /* background-repeat */
+        /* no-repeat | repeat | repeat-x | repeat-y */
+        background-repeat: repeat-x;
+        background-repeat: repeat-y;
+        background-repeat: repeat;
+        background-repeat: no-repeat;
+
+        /* background-position */
+        /* 수평값: left, center, right */
+        /* 수직값: top, center, bottom */
+        background-position: top right;
+        background-position: center;
+        background-position: top left;
+
+        /* background-size */
+        background-size: 50%;
+        /* cover는 container의 넓은쪽에 맞춘다 */
+        background-size: cover;
+        /* contain은 짧은쪽에 맞춘다. */
+        background-size: contain;
+        /* auto | 크기값 | 백분율 | cover | contain */
+
+        /* background-clip */
+        /* border-box | padding-box | content-box */
+        background-clip: content-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background">
+      <h1>안녕 싸피</h1>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function fn() {
+            // var i;
+            // var k;
+
+
+
+            console.log("k 선언 전", k); // undefined
+            var i = 100; // i = 100;
+
+
+            console.log(i);
+            // var로 선언된 변수는 함수내에서 어디에서든지 사용가능하다
+            // 변수 선언을 함수 위로 끌어 올린다. 호이스팅(hoisting)
+            // 변수 값 대입은 해당라인에서 실행됨.
+            for (var k = 0; k < 10; k++) {// k = 0;
+                console.log("k", k);
+            }
+            console.log("k end", k)
+        }
+        // fn();
+
+        function fn2() {
+            // console.log("k 선언 전", k);
+            for (let k = 0; k < 10; k++) {
+                console.log("k", k);
+            }
+            // console.log("k end", k)
+        }
+        fn2();
+
+        var age = 10;
+        var age = 20; // var는 재선언 가능
+        console.log(age);
+
+
+        let addr = "대전";
+        // let addr = "서울"; // let은 재선언 안된다
+        addr = "서울"; // 재할당은 가능
+
+
+        const VALUE = 10;
+        // const VALUE = 20;
+        // VALUE = 20;  // 재할당 재선언 불가능
+    </script>
+</body>
+</html>

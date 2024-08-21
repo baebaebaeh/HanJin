@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let id; // undefined
+        console.log(!!id); //false
+        
+        id == undefined && console.log("undefined 직접비교가능");
+
+        if (id) {
+            console.log("undefined 직접비교가능");
+        }
+        if (id == undefined) {
+
+        }
+
+        id = ""; // undefined
+        console.log(!!id); //false
+        id = 0; // undefined
+        console.log(!!id); //false
+        id = null; // undefined
+        console.log(!!id); //false
+        id = 0; // undefined
+        console.log(!!id); //false
+
+    </script>
+</body>
+</html>

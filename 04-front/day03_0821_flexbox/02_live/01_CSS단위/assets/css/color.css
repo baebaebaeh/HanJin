@@ -1,0 +1,67 @@
+/* div {
+    color: black;
+    color: #000;
+    color: #ffffff;
+    color: rgb(255, 0, 0);
+    color: hsl(120, 100%, 0);
+    color: rgba(0, 0, 255, 0.5);
+    color: hsla(120, 100%, 0, 0.5);
+} */
+
+.black {
+    color: black;
+    /* color: #000; */
+    color: hsl(120, 100%, 0);
+}
+
+.white {
+    /* color: white; */
+    color: #ffffff;
+}
+
+.red {
+    color: red;
+    /* color: rgb(255, 0, 0); */
+}
+
+.half-black {
+    color: hsla(120, 100%, 0, 0.5);
+}
+
+.half-blue {
+    color: rgba(0, 0, 255, 0.5);
+}
+
+/* 
+    hsl이란?
+    h - hue(색조=색상환의각도값 0도 ~ 360도)
+        0도   = 빨간색
+        120도 = 녹색
+        240도 = 파란색
+        360도 = 빨간색 (환형)
+
+    s - saturation(채도=색의 강도 %) 
+        0%   =  회색 음영
+        100% =  순수한 색, 음영 x
+
+    l - lightness(밝기 %)
+        0%   = 검은색
+        100% = 흰색
+*/
+
+/* 
+    rgb란?
+    삼원색을 뜻함
+    reg
+    green
+    blue
+    16진수 또는 함수형 표기법 사용해서 특정 색을 표현
+*/
+
+/* 
+    a이란?
+    a (알파, 색의 투명도)
+        0.0 ~ 1.0 실수로 표현
+        0.0 = 완전히 투명한 상태
+        1.0 = 투명도가 전혀 없는 온전한 색
+*/

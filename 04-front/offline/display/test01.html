@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        div {
+            width: 200px;
+            height: 200px;
+            border: 1px solid tomato;
+            display: none;
+        }
+
+        #movie {
+            /* visibility: visible; */
+
+            /* 안보이는데 자리는 차지 */
+            /* visibility: hidden; */
+            display: block;
+            /* display: none; */
+
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+        }
+
+        ul>li {
+            float: left;
+            margin: 30px;
+        }
+
+        li>button {
+            width: 60px;
+            height: 40px;
+            border: 1px solid #3455;
+            color: #123123;
+            font-size: 1.1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        li>button:hover {
+            background-color: #3455;
+            color: white;
+            box-shadow: 1px 1px 1px 1px #345634
+        }
+
+        /* #empty {
+            height: 0;
+            clear: both;
+        } */
+    </style>
+    <script>
+        function showDiv(idMsg) {
+            alert("보여주어야 할 Div id : " + idMsg);
+            let divEls = document.querySelectorAll("div");
+            for (let i = 0; i < divEls.length; i++) {
+                let divEl = divEls[i];
+                console.log(divEl);
+                divEl.style.display = "none";
+            }
+            document.querySelector("#" + idMsg).style.display = "block";
+        }
+    </script>
+</head>
+
+<body>
+    <ul>
+        <li><button onclick="showDiv('movie')">영화</button></li>
+        <li><button onclick="showDiv('music')">음악</button></li>
+        <li><button onclick="showDiv('reading')">독서</button></li>
+        <li><button onclick="showDiv('exercise')">운동</button></li>
+    </ul>
+    <!-- <div id="empty"></div> -->
+    <div id="movie">오태식 vs 차태식</div>
+    <div id="music">티어스 vs 체념</div>
+    <div id="reading">초밥왕 vs 복학왕</div>
+    <div id="exercise">스쿼트 vs 데드</div>
+</body>
+
+</html>

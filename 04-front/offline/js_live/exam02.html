@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    function fn() {
+      var i;
+      var k;
+
+      console.log("k 선언 전", k);
+      i = 100;
+      console.log(i);
+      for (k = 0; k < 10; k++) {
+        console.log("k", k);
+      }
+      console.log("k end", k);
+    }
+    */
+    function fn() {
+      console.log("k 선언 전", k);
+      var i = 100;
+      console.log(i);
+      for (var k = 0; k < 10; k++) {
+        console.log("k", k);
+      }
+      console.log("k end", k);
+    }
+    // fn();
+
+    function fn2() {
+      // console.log("k 선언 전", k);
+      for (let k = 0; k < 10; k++) {
+        console.log("k", k);
+      }
+      // console.log("k end", k);
+    }
+    // fn2();
+
+    var age = 10;
+    var age = 20;
+
+    console.log(age);
+    let addr = "대전";
+    // let addr = "서울";
+    addr = "서울";
+
+    const VALUE = 10;
+    // const VALUE = 20;  error
+    // VALUE = 20;  error
+  </script>
+</body>
+</html>
+
+
+
+
+
