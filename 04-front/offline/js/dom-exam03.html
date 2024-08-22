@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>1번</div>
+  <div class="a">2번</div>
+  <div class="a">3번</div>
+  <script>
+    /*
+    // const divList = document.getElementsByTagName("div");
+    const divList = document.querySelectorAll("div"); // 위와 같다
+    for (let i = 0; i < divList.length; i++){
+      console.log(divList[i].innerText);
+    }
+    */
+    const divList = document.getElementsByClassName("a");
+    // const divList = document.querySelectorAll(".a");
+    for (let i = 0; i < divList.length; i++) {
+      console.log(divList[i].innerText);
+    }
+
+
+
+  </script>
+</body>
+
+</html>

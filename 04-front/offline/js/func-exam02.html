@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function fn2() {
+      return function(msg) {
+        console.log("리턴된 함수 실행 : ", msg)
+      }
+    }
+    // let returnFn = fn2();
+    // returnFn("hello");
+    // 위와 아래와 똑같다. 아래는 한번만 사용되는 변수면 그냥 이렇게
+    fn2()("hello");
+    // console.log(returnFn);
+
+
+
+    function fn(msg) {
+      console.log("fn 호출되었음", msg)
+    }
+    function callFn(callback) {
+      console.log(callback);
+      callback("hello");
+    }
+    callFn(fn);
+    // callFn(fn());
+    // callFn(1);
+    // callFn("hell");
+    // callFn([1, 2]);
+    // callFn(function() {});
+
+  </script>
+</body>
+</html>

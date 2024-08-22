@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h2 id="time"></h2>
+  <button onclick="start()">시작</button>
+  <button onclick="stop()">중지</button>
+  <script>
+    const h2El = document.querySelector("#time");
+    h2El.innerText = "안녕하세요 시간 정보가 출력됩니다.";
+    // console.dir(h2El);
+    // 지정 시간마다 계속 실행
+    let timeId;
+    function start() {
+      timeId = setInterval(function () {
+        const date = new Date();
+        h2El.innerText = date.toLocaleString();
+      }, 1000);
+    }
+    function stop() {
+      clearInterval(timeId);
+      h2El.innerText = "안녕하세요 시간 정보가 출력됩니다.";
+    }
+    // 지정 시간에 한번만 실행
+
+    
+
+
+  </script>
+</body>
+</html>

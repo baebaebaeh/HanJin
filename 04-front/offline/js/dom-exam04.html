@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+    <button onclick="addEl()">추가</button>
+    <button onclick="delEl()">삭제</button>
+  </div>
+  <div id="view"></div>
+  <script>
+    function addEl() {
+
+      // const viewEl = document.getElementById("view");
+      // // 길어지게 되면 메모리상 손해다.
+      // viewEl.innerHTML += `
+      // <div>
+      //   <h2>추가됨<h2>
+      // </div>
+      // `
+
+
+      // dom을 이용한 추가
+      const viewEl = document.getElementById("view");
+      const divEl = document.createElement("div");
+      const h2El = document.createElement("h2");
+      const h2Text = document.createTextNode("추가됨");
+      divEl.appendChild(h2El);
+      h2El.appendChild(h2Text);
+      viewEl.appendChild(divEl);
+
+      /*
+      <div>
+        <h2>추가됨<h2>
+      </div>
+      */
+    }
+    function delEl() {
+      /*
+      const viewEl = document.getElementById("view");
+      const lastDiv = document.querySelector("#view > div:last-child");
+      console.dir(lastDiv);
+      viewEl.removeChild(lastDiv);
+      */
+
+
+      const lastDiv = document.querySelector("#view > div:last-child");
+      if (lastDiv == null) {
+        alert("더 이상 삭제가 불가능 합니다.");
+        return;
+      }
+      lastDiv.remove();
+    }
+  </script>
+</body>
+
+</html>

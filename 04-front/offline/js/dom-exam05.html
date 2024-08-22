@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <button>추가</button>
+  </div>
+  <div id="view"></div>
+
+  <script>
+    // 위 div의 버튼에 onclick 어쩌구 하지말고
+    // 스크립트안에 넣자.
+    const btn = document.querySelector("button");
+    // btn 버튼에 click 이벤트를 만들어보자
+
+    // 밑에꺼만 실행됨
+    // btn.onclick = function () {
+    //   alert("클릭됨")
+    // }
+    // btn.onclick = function () {
+    //   alert("클릭됨2")
+    // }
+
+    // 둘 다 실행됨
+    // (어떤 이벤트를 처리할건지, 어떤 함수 실행할 건지)
+    btn.addEventListener("click", function() {
+      const viewEl = document.getElementById("view");
+      const imgEl = document.createElement("img");
+      imgEl.setAttribute("src","a.jpg");
+      imgEl.setAttribute("width","200px");
+      viewEl.appendChild(imgEl);
+    });
+    // btn.addEventListener("click", function() {
+    //   alert("클릭됨2")
+    // });
+
+  </script>
+</body>
+</html>

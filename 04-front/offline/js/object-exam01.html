@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // key:value
+    let member = {
+      id: "ssafy",
+      name: "우기",
+      age: 33
+    };
+    console.dir(member);
+
+    // let member2 = new Object();
+    // 위도 가능하지만 아래가 편하다
+    let member3 = {
+      id: "ukuk",
+      name: "욱사마",
+    };
+    function Member4(id, name) {
+      // 생성된 객체의 id를 가리킴
+      this.id = id;
+      this.name = name;
+    }
+    // 생성자.
+    new Member4();
+    // 위와 아래와는 차이가 있다.
+    Member4();
+
+    let m1 = Member4();
+    console.log("m1", m1); // undefined
+    let m2 = new Member4("ukuk", "욱사마");
+    console.log("m2", m2); // Member4{}
+    // 즉 new사용하면 객체를 새로 생성해서 주소를 m2에 줌
+    // 그냥 Member4하면 리턴값을 m1에 준다.
+    // 리턴타입을 알려주지 않는 js는 new를 붙일지 말지를 모른다.
+    // 그럼 어떻게 구분하나?
+    // function을 만들때 생성자로 사용하려고 하면 대문자로 만들어준다.
+    // ex) Member4
+    let m3 = new Member4("sonny", "흥민쏜");
+    console.log("m3", m3); // Member4{}
+    
+    
+
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

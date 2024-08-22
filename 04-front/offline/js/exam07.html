@@ -1,32 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
 <body>
-    <script>
-        const arr3 = ["a", "b", "c", "ac", "ab", "bc", "abc"];
-        console.dir(arr3);
+  <script>
+    function fn() {
+      console.log(`1`);
+    }
+    fn();
+    function fn(val) {
+      console.log(`2`);
+    }
+    fn(100);
+    function fn(val1, val2) {
+      console.log(`3`);
+    }
+    fn(100, 200);
 
 
-        const member = {
-            id: "bhj",
-            age: 20
-        };
-        for (const key in member) {
-            console.log(`${key} -> ${member[key]}`);
-        }
-        const arr = [10, 20, 30];
-        for (const idx in arr) {
-            console.log(`${idx} -> ${arr[idx]}`);
-        }
-        const arr2 = ["a", "c", "ac", "abc"];
-        for (const value of arr2) {
-            console.log("value", value);
-        }
 
-    </script>
+    const arr3 = ["a", "b", "c", "ac", "ab", "bc", "abc"];
+    console.dir(arr3);
+    // 콜백함수
+    // 함수를 값처럼 사용
+    arr3.forEach(function(value, index, array) {
+      console.log(`call -> ${index} : ${value} : ${array}`);
+    });
+
+
+/*
+    const member = {
+      id: "sbc",
+      age: 20
+    };
+    for (const key in member) {
+      console.log(`${key} -> ${member[key]}`);
+    }
+    const arr2 = ["a", "c", "ac", "abc"];
+    for (const value of arr2) {
+      console.log("value", value);
+    }
+
+    const arr = [10, 20, 30];
+    for (const idx in arr) {
+      console.log(`${idx} -> ${arr[idx]}`);
+    }
+      */
+  </script>  
 </body>
 </html>
