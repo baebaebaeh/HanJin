@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .a2 {
+        clear: both
+    }
+</style>
+
+<body>
+    <main>
+        <div id="a" class="b"> 1 </div>
+        <div class="b"> 2 </div>
+        <div name="c"> 3 </div>
+        <p name="c"> 4 </p>
+        <p class="d"> 5 </p>
+        <p class="e"> 6 </p>
+    </main>
+    <script>
+        let list = document.querySelectorAll("[name='c']");
+        console.log(list[0].innerText);
+    </script>
+</body>
+
+</html>
