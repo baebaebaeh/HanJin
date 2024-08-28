@@ -22,6 +22,7 @@ public class 병합정렬01 {
 			int mid = (left + right) / 2;
 			mergeSort(left, mid);
 			mergeSort(mid + 1, right);
+			
 			merge(left, mid, right);
 		}
 	}

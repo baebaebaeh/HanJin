@@ -96,7 +96,7 @@ public class d0827 {
 		}
 		for (int i = start; i <= N - R + startIdx; i++) {
 			sel[startIdx] = data[i];
-			조합반복재귀(i + 1, startIdx + 1);		
+			조합반복재귀(i + 1, startIdx + 1);
 		}
 	}
 
