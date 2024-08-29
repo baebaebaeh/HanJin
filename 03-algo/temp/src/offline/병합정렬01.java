@@ -12,7 +12,7 @@ public class 병합정렬01 {
 	}
 
 	// left :구간의 시작 위치 / right : 구간의 끝
-	static void mergeSort(int left, int right) {
+	private static void mergeSort(int left, int right) {
 //		if(left >= right) return;
 //		int mid = (left+right)/2;
 //		mergeSort(left, mid);
@@ -22,13 +22,12 @@ public class 병합정렬01 {
 			int mid = (left + right) / 2;
 			mergeSort(left, mid);
 			mergeSort(mid + 1, right);
-			
 			merge(left, mid, right);
 		}
 	}
 
 	// l
-	static void merge(int left, int mid, int right) {
+	private static void merge(int left, int mid, int right) {
 		int L = left; // 왼쪽구간의 시작 포인트
 		int R = mid + 1; // 오른쪽구간의 시작 포인트
 
