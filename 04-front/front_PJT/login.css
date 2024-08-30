@@ -1,0 +1,91 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+.logo img {
+    width: 150px;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #87CEEB;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.log&cancel{
+    display: flex;
+    justify-content: space-between;
+    width: 100%; 
+    border-radius: 10px; 
+    padding: 10px; 
+}
+
+.login-btn1 {
+    width: 48%; 
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(49, 148, 206);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+.login-btn2 {
+    width: 48%; 
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: skyblue;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
