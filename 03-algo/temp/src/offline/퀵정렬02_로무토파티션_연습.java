@@ -3,9 +3,9 @@ package offline;
 import java.util.Arrays;
 
 public class 퀵정렬02_로무토파티션_연습 {
-	static int[] arr = {2,45,76,8,9,43,21,9};
+	static int[] arr = { 2, 45, 76, 8, 9, 43, 21, 9 };
 	static int N = arr.length;
-	
+
 	public static void main(String[] args) {
 		quickSort(0, N - 1);
 		System.out.println(Arrays.toString(arr));
@@ -23,7 +23,7 @@ public class 퀵정렬02_로무토파티션_연습 {
 		int pivot = arr[right];
 		int i = left - 1;
 		for (int j = left; j < right; j++) {
-			if (arr[j] <= pivot) {
+			if (pivot >= arr[j]) {
 				i++;
 				int temp = arr[j];
 				arr[j] = arr[i];
@@ -31,7 +31,7 @@ public class 퀵정렬02_로무토파티션_연습 {
 			}
 		}
 		int temp = arr[i + 1];
-		arr[i + 1] = arr[right];
+		arr[i + 1] = pivot;
 		arr[right] = temp;
 		return i + 1;
 	}
