@@ -1,28 +1,29 @@
 package offline;
 import java.util.Arrays;
+import java.util.Iterator;
 
 public class 순열03_방문체크_연습 {
-	static int[] nums = new int[] { 0, 1, 2 };
-	static int N = nums.length;
+	static int[] arr = { 1, 2, 3, 4 };
+	static int N = arr.length;
 	static boolean[] visited = new boolean[N];
-	static int[] result = new int[N];
-
+	static int[] ans = new int[N];
+	
 	public static void main(String[] args) {
 		perm(0);
 	}
-	static void perm(int idx) {
+
+	private static void perm(int idx) {
 		if (idx == N) {
-			System.out.println(Arrays.toString(result));
+			System.out.println(Arrays.toString(arr));
 			return;
 		}
 		for (int i = 0; i < N; i++) {
-			if (visited[i])
-				continue;
-			result[idx] = nums[i];
+			if () {
+				
+			}
 			visited[i] = true;
 			perm(idx + 1);
 			visited[i] = false;
-
 		}
 	}
 }
