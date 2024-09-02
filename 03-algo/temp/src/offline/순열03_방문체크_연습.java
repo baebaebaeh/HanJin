@@ -24,7 +24,5 @@ public class 순열03_방문체크_연습 {
 			visited[i] = false;
 
 		}
-
 	}
-
 }
