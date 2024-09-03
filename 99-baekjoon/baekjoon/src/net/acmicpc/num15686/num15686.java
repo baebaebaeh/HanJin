@@ -9,6 +9,7 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.StringTokenizer;
@@ -16,12 +17,12 @@ import java.util.StringTokenizer;
 public class num15686 {
 	static int[][] map;
 	static boolean[][] visited;
-	static ArrayList<int[]> start;
-	static ArrayList<int[]> end;
-	static PriorityQueue<Integer> chicken; // [[거리,
+	static ArrayList<int[]> one;
+	static ArrayList<int[]> two;
 	static int[] dr = { -1, 1, 0, 0 };
 	static int[] dc = { 0, 0, -1, 1 };
-	static int N, M;
+	static int N, M, min;
+	static int[][] sel;
 
 	public static void main(String[] args) throws IOException {
 		System.setIn(new FileInputStream("data/input15686.txt"));
@@ -31,33 +32,23 @@ public class num15686 {
 		N = Integer.parseInt(st.nextToken());
 		M = Integer.parseInt(st.nextToken());
 		map = new int[N][N];
-		start = new ArrayList<>();
+		one = new ArrayList<>();
+		two = new ArrayList<>();
 		visited = new boolean[N][N];
-		chicken = new PriorityQueue<>((o1, o2) -> {
-			return o1 - o2;
-		});
+		min = Integer.MAX_VALUE;
 		for (int i = 0; i < N; i++) {
 			st = new StringTokenizer(br.readLine());
 			for (int j = 0; j < N; j++) {
 				map[i][j] = Integer.parseInt(st.nextToken());
 				if (map[i][j] == 1)
-					start.add(new int[] { i, j });
+					one.add(new int[] { i, j });
 				if (map[i][j] == 2)
-					end.add(new int[] { i, j });
+					two.add(new int[] { i, j });
 			}
 		}
-		for (int i = 0; i < start.size(); i++) {
-			int dist = bfs(start.get(i)[0], start.get(i)[1], 0);
-			chicken.add(dist);
-			for (int j = 0; j < N; j++) {
-				Arrays.fill(visited[j], false);
-			}
-		}
-		int sum = 0;
-		for (int i = 0; i < M; i++) {
-			sum += chicken.poll();
-		}
-		System.out.println(sum / M);
+		sel = new int[M][2];
+		comb(0, 0);
+		System.out.println(min);
 	}
 
 	private static int bfs(int r, int c, int dist) {
@@ -84,4 +75,41 @@ public class num15686 {
 		}
 		return -1;
 	}
+	private static void comb(int start, int startIdx) {
+		if (startIdx == M) {
+			int sum = 0;
+			for (int i = 0; i < M; i++) {
+				sum += bfs(sel[i][0], sel[i][1], 0);
+				for (int j = 0; j < N; j++) {
+					Arrays.fill(visited[j], false);
+				}
+			}
+			if (sum < min) min = sum;
+			return;
+		}
+		for (int i = start; i <= two.size() - M + startIdx; i++) {
+			sel[startIdx] = two.get(i);
+			comb(i + 1, startIdx + 1);
+		}
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
