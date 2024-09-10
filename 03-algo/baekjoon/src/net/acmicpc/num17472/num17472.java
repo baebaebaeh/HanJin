@@ -70,7 +70,7 @@ public class num17472 {
 			while (true) {
 				r = r + dr[d];
 				c = c + dc[d];
-				if (r >= 0 && r < N && c >= 0 && c < M
+				if (r < 0 && r >= N && c < 0 && c >= M
 						&& map[r][c] == now) {
 					continue out;
 				}
