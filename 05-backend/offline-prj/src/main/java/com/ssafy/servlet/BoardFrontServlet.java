@@ -1,4 +1,4 @@
-package com.ssafy.servlet;
+ package com.ssafy.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -59,7 +59,7 @@ public class BoardFrontServlet extends HttpServlet {
 					<!--  게시판 등록폼 작성 -->
 					<!--  필수 : 제목, 내용, 작성자 -->
 					<form action="http://localhost/offline-prj/mvc/board" method="post">
-						<input type="hidden" name="type" value="write" />
+						<input name="type" value="write" />
 						<div>
 							<label>제목</label>
 							<input type="text" name="title" />
