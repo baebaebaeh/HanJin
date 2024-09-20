@@ -69,28 +69,35 @@ public class num23290_ {
 			smell[sy][sx] = 2;
 		}
 		
-		
+		for (int i = 0; i < S; i++) {
+			
 		moveFish(sx, sy);
-		moveShark(sx, sy);
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; j++) {
-				if (smell[i][j] == 0) {
-					continue;
-				}
-				smell[i][j]--;
-			}
-		}
-		for (int i = 0; i < tmpList.size(); i++) {
-			for (int j = 0; j < 2; j++) {
-			 	System.out.print(tmpList.get(i)[j] +" "); 
-			}
-			System.out.println();
-		}
+//		moveShark(sx, sy);
+//		for (int i = 0; i < 4; i++) {
+//			for (int j = 0; j < 4; j++) {
+//				if (smell[i][j] == 0) {
+//					continue;
+//				}
+//				smell[i][j]--;
+//			}
+//		}
+//		for (int i = 0; i < tmpList.size(); i++) {
+//			for (int j = 0; j < 2; j++) {
+//			 	System.out.print(tmpList.get(i)[j] +" "); 
+//			}
+//			System.out.println();
+//		}
+		
+		
+		
+		
 		
 //		for (int[] a : smell)
 //			System.out.println(Arrays.toString(a));
-//		for (int[] a : countMap)
-//			System.out.println(Arrays.toString(a));
+		for (int[] a : countMap)
+			System.out.println(Arrays.toString(a));
+		System.out.println();
+		}
 //		for (int i = 0; i < 4; i++) {
 //			for (int j = 0; j < 4; j++) {
 //				for (int j2 = 0; j2 < map.get(i).get(j).size(); j2++) {
@@ -100,28 +107,28 @@ public class num23290_ {
 //		}
 	}
 
-	private static void moveShark(int sx, int sy) {
-		List<int[]> list = new ArrayList<>();
-		list.add(new int[] { sx, sy });
-		dfs(list, 0, 0);
-	}
-
-	private static void dfs(List<int[]> list1, int dist, int fish) {
-		if (dist == 3) {
-			if (fish > maxFish) {
-				tmpList = list1;
-			}
-			return;
-		}
-		for (int d = 3; d >= 0; d--) {
-			int nsx = list1.get(dist)[0] + dsc[d];
-			int nsy = list1.get(dist)[1] + dsr[d];
-			if (nsx >= 0 && nsx < 4 && nsy >= 0 && nsy < 4) {
-				list1.add(new int [] { list1.get(dist)[0] + dsc[d], list1.get(dist)[1] + dsr[d] });
-				dfs(list1, dist + 1, fish + countMap[nsx][nsy]);				
-			}
-		}
-	}
+//	private static void moveShark(int sx, int sy) {
+//		List<int[]> list = new ArrayList<>();
+//		list.add(new int[] { sx, sy });
+//		dfs(list, 0, 0);
+//	}
+//
+//	private static void dfs(List<int[]> list1, int dist, int fish) {
+//		if (dist == 3) {
+//			if (fish > maxFish) {
+//				tmpList = list1;
+//			}
+//			return;
+//		}
+//		for (int d = 3; d >= 0; d--) {
+//			int nsx = list1.get(dist)[0] + dsc[d];
+//			int nsy = list1.get(dist)[1] + dsr[d];
+//			if (nsx >= 0 && nsx < 4 && nsy >= 0 && nsy < 4) {
+//				list1.add(new int [] { list1.get(dist)[0] + dsc[d], list1.get(dist)[1] + dsr[d] });
+//				dfs(list1, dist + 1, fish + countMap[nsx][nsy]);				
+//			}
+//		}
+//	}
 
 	private static void moveFish(int sx, int sy) {
 		// 모든 4*4에서
