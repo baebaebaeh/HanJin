@@ -9,9 +9,8 @@
 <body>
 	<h2>대전 4반 게시판</h2>
 	<!-- 작성자, 제목, 번호, 조회수 -->
-	<!-- 입력받는값은 작성자와, 제목 -->
 	<form action="/board-step01-mvc/board" method="post">
-		<input type="hidden" name="action" value="write"/>
+		<input type="hidden" name="action" value="write" />
 		<table>
 			<tr>
 				<td>제목</td>
@@ -34,3 +33,9 @@
 	</form>
 </body>
 </html>
+
+
+
+
+
+

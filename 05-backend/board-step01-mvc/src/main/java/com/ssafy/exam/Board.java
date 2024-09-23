@@ -1,26 +1,19 @@
 package com.ssafy.exam;
 
 public class Board {
-
 	private int no;
 	private String title;
 	private String writer;
 	private String content;
 	private int viewCnt;
-	
-	
-
 	public Board() {}
-
 	public Board(int no, String title, String writer, String content, int viewCnt) {
-		super();
 		this.no = no;
 		this.title = title;
 		this.writer = writer;
 		this.content = content;
 		this.viewCnt = viewCnt;
 	}
-
 	public int getNo() {
 		return no;
 	}
@@ -56,5 +49,4 @@ public class Board {
 		return "Board [no=" + no + ", title=" + title + ", writer=" + writer + ", content=" + content + ", viewCnt="
 				+ viewCnt + "]";
 	}
-
 }

@@ -1,17 +1,11 @@
 <%@page import="com.ssafy.exam.Board"%>
 <%@page import="java.util.List"%>
-
-
 <%@ page language="java" 
 	contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"
-    
-%>
+    pageEncoding="UTF-8"%>
 <%
-	// list메서드에서 보내준 list받아주자
-	// 컨트롤 스페이스로 임포트 자동으로 해주자
 	List<Board> list = (List<Board>)request.getAttribute("list");
-%>
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,14 +26,21 @@
 		%>
 		<tr>
 			<td><%= b.getNo() %></td>
-			<td>연습중</td>
-			<td>쌤</td>
-			<td>4</td>
+			<td><%= b.getTitle() %></td>
+			<td><%= b.getWriter() %></td>
+			<td><%= b.getViewCnt() %></td>
 		</tr>
 		<%
 			}
 		%>
 	</table>
-	<a href="/board-step01-mvc/board?action=writeForm">글쓰기</a>
+	<a href="/board-step01-mvc/board?action=writeForm">글쓰기</a>	
 </body>
 </html>
+
+
+
+
+
+
+

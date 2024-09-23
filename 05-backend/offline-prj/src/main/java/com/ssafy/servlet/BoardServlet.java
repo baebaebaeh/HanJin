@@ -50,7 +50,7 @@ public class BoardServlet extends HttpServlet {
 							</tr>
 							%s
 						</table>
-						<a href="http://localhost/offline-prj/board.html">글쓰기</a>
+						<a href="http://192.168.210.40:8080/offline-prj/board.html">글쓰기</a>
 					</body>
 				</html>
 				""".formatted(trHtml)
