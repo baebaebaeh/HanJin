@@ -67,7 +67,6 @@ public class num23290 {
 			smell[sy][sx] = 2;
 		}
 		
-		
 		moveFish(sx, sy);
 		moveShark(sx, sy);
 		for (int i = 0; i < 4; i++) {

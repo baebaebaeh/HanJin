@@ -17,12 +17,12 @@ import java.util.StringTokenizer;
 
 public class num23290_ {
 	static List<List<Queue<Integer>>> map; // 얘는 그냥 상어가 최다 물고기 경로 찾는 용도
+	static List<List<Queue<Integer>>> copyMap;
 	static Queue<int[]> tmpQueue;
-	static Queue<int[]> copy; // 상어가 복제한물고기 [row, col, d]
 	static int[][] countMap;
 	static int[][] smell; // 0이 아니면 스멜~
-	static List<int[]> tmpList;
-	static int[] dr = { 0, 1, 1, 1, 0, -1, -1, -1 };
+	static List<int[]> moveList;
+	static int[] dr = { 0, -1, -1, -1, 0, 1, 1, 1 };
 	static int[] dc = { -1, -1, 0, 1, 1, 1, 0, -1 };
 	static int[] dsr = { -1, 0, 1, 0 };
 	static int[] dsc = { 0, -1, 0, 1 };
@@ -37,7 +37,6 @@ public class num23290_ {
 		int S = Integer.parseInt(st.nextToken());
 		countMap = new int[4][4];
 		map = new ArrayList<>();
-		copy = new ArrayDeque<>();
 		tmpQueue = new ArrayDeque<>();
 		for (int i = 0; i < 4; i++) {
 			map.add(new ArrayList<>());
@@ -52,27 +51,26 @@ public class num23290_ {
 			int fy = Integer.parseInt(st.nextToken()) - 1;
 			// 좌 좌상 상 우상 우 우하 하 좌하
 			// 1 2 3 4 5 6 7 8
-			int d = Integer.parseInt(st.nextToken());
-			map.get(fy).get(fx).add(d);
-			copy.add(new int[] {fy, fx, d});
-			countMap[fy][fx]++;
+			int d = Integer.parseInt(st.nextToken()) - 1;
+			map.get(fx).get(fy).add(d);
+			countMap[fx][fy]++;
 		}
 		st = new StringTokenizer(br.readLine());
 		int sx = Integer.parseInt(st.nextToken()) - 1;
 		int sy = Integer.parseInt(st.nextToken()) - 1;
-		if (countMap[sy][sx] != 0) {
-			int tmp = map.get(sy).get(sx).size();
+		if (countMap[sx][sy] != 0) {
+			int tmp = map.get(sx).get(sy).size();
 			for (int i = 0; i < tmp; i++) {
-				map.get(sy).get(sx).poll();
+				map.get(sx).get(sy).poll();
 			}
-			countMap[sy][sx] = 0;
-			smell[sy][sx] = 2;
+			countMap[sx][sy] = 0;
 		}
 		
 		for (int i = 0; i < S; i++) {
 			
 		moveFish(sx, sy);
-//		moveShark(sx, sy);
+		moveShark(sx, sy);
+		sharkEat();
 //		for (int i = 0; i < 4; i++) {
 //			for (int j = 0; j < 4; j++) {
 //				if (smell[i][j] == 0) {
@@ -97,7 +95,12 @@ public class num23290_ {
 		for (int[] a : countMap)
 			System.out.println(Arrays.toString(a));
 		System.out.println();
+		
+		
 		}
+		
+		
+		
 //		for (int i = 0; i < 4; i++) {
 //			for (int j = 0; j < 4; j++) {
 //				for (int j2 = 0; j2 < map.get(i).get(j).size(); j2++) {
@@ -107,28 +110,34 @@ public class num23290_ {
 //		}
 	}
 
-//	private static void moveShark(int sx, int sy) {
-//		List<int[]> list = new ArrayList<>();
-//		list.add(new int[] { sx, sy });
-//		dfs(list, 0, 0);
-//	}
-//
-//	private static void dfs(List<int[]> list1, int dist, int fish) {
-//		if (dist == 3) {
-//			if (fish > maxFish) {
-//				tmpList = list1;
-//			}
-//			return;
-//		}
-//		for (int d = 3; d >= 0; d--) {
-//			int nsx = list1.get(dist)[0] + dsc[d];
-//			int nsy = list1.get(dist)[1] + dsr[d];
-//			if (nsx >= 0 && nsx < 4 && nsy >= 0 && nsy < 4) {
-//				list1.add(new int [] { list1.get(dist)[0] + dsc[d], list1.get(dist)[1] + dsr[d] });
-//				dfs(list1, dist + 1, fish + countMap[nsx][nsy]);				
-//			}
-//		}
-//	}
+	private static void sharkEat() {
+		for (int i = 0; i < 3; i++) {
+			moveList.get(i);
+		}
+	}
+
+	private static void moveShark(int sx, int sy) {
+		List<int[]> list = new ArrayList<>();
+		list.add(new int[] { sx, sy });
+		dfs(list, 0, 0);
+	}
+
+	private static void dfs(List<int[]> list1, int dist, int fish) {
+		if (dist == 3) {
+			if (fish >= maxFish) {
+				moveList = list1;
+			}
+			return;
+		}
+		for (int d = 3; d >= 0; d--) {
+			int nsx = list1.get(dist)[0] + dsc[d];
+			int nsy = list1.get(dist)[1] + dsr[d];
+			if (nsx >= 0 && nsx < 4 && nsy >= 0 && nsy < 4) {
+				list1.add(new int [] { list1.get(dist)[0] + dsc[d], list1.get(dist)[1] + dsr[d] });
+				dfs(list1, dist + 1, fish + countMap[nsx][nsy]);				
+			}
+		}
+	}
 
 	private static void moveFish(int sx, int sy) {
 		// 모든 4*4에서
@@ -145,7 +154,7 @@ public class num23290_ {
 						int nc = c + dc[d];
 						if (nr >= 0 && nr < 4 && nc >= 0 && nc < 4 && // 벗어나지않고
 								smell[nr][nc] == 0 && // 냄새나지 않고
-								nr != sy && nc != sx) { // 상어가 아니면
+								(nr != sx || nc != sy)) { // 상어가 아니면
 							countMap[r][c]--; // 물고기 위치 --
 							countMap[nr][nc]++; // 물고기 이동할곳 ++
 							tmpQueue.add(new int[] {nr, nc, d}); // 물고기 추가

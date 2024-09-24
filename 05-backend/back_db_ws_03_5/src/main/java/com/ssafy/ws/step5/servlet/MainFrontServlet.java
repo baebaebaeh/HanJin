@@ -68,7 +68,7 @@ public class MainFrontServlet extends HttpServlet {
 	private void signUp(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		User user = new User();
 		String userId = req.getParameter("userId");
-		String password = req.getParameter("userId");
+		String password = req.getParameter("password");
 		String userName = req.getParameter("userName");
 		String nickName = req.getParameter("nickName");
 		String email = req.getParameter("email");
