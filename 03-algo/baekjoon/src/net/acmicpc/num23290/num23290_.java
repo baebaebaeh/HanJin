@@ -24,9 +24,9 @@ public class num23290_ {
 	static List<int[]> moveList;
 	static int[] dr = { 0, -1, -1, -1, 0, 1, 1, 1 };
 	static int[] dc = { -1, -1, 0, 1, 1, 1, 0, -1 };
-	static int[] dsr = { -1, 0, 1, 0 };
-	static int[] dsc = { 0, -1, 0, 1 };
-	static int tmpX, tmpY, maxFish;
+	static int[] dsr = { 0, 1, 0, -1 };
+	static int[] dsc = { 1, 0, -1, 0 };
+	static int tmpX, tmpY, maxFish, sx, sy, ans;
 
 	public static void main(String[] args) throws IOException {
 		System.setIn(new FileInputStream("data/input23290.txt"));
@@ -56,96 +56,129 @@ public class num23290_ {
 			countMap[fx][fy]++;
 		}
 		st = new StringTokenizer(br.readLine());
-		int sx = Integer.parseInt(st.nextToken()) - 1;
-		int sy = Integer.parseInt(st.nextToken()) - 1;
-		if (countMap[sx][sy] != 0) {
-			int tmp = map.get(sx).get(sy).size();
-			for (int i = 0; i < tmp; i++) {
-				map.get(sx).get(sy).poll();
-			}
-			countMap[sx][sy] = 0;
-		}
-		
+		sx = Integer.parseInt(st.nextToken()) - 1;
+		sy = Integer.parseInt(st.nextToken()) - 1;
+//		if (countMap[sx][sy] != 0) {
+//			int tmp = map.get(sx).get(sy).size();
+//			for (int i = 0; i < tmp; i++) {
+//				map.get(sx).get(sy).poll();
+//			}
+//			countMap[sx][sy] = 0;
+//		}
 		for (int i = 0; i < S; i++) {
-			
-		moveFish(sx, sy);
-		moveShark(sx, sy);
-		sharkEat();
-//		for (int i = 0; i < 4; i++) {
-//			for (int j = 0; j < 4; j++) {
-//				if (smell[i][j] == 0) {
-//					continue;
-//				}
-//				smell[i][j]--;
-//			}
-//		}
-//		for (int i = 0; i < tmpList.size(); i++) {
-//			for (int j = 0; j < 2; j++) {
-//			 	System.out.print(tmpList.get(i)[j] +" "); 
-//			}
-//			System.out.println();
-//		}
-		
-		
-		
-		
-		
-//		for (int[] a : smell)
-//			System.out.println(Arrays.toString(a));
-		for (int[] a : countMap)
-			System.out.println(Arrays.toString(a));
-		System.out.println();
-		
-		
+			maxFish = 0;
+			copyFish();
+			moveFish();
+			moveShark();
+			sharkEat();
+			flushFish();
+			smellDown();
 		}
-		
-		
-		
-//		for (int i = 0; i < 4; i++) {
-//			for (int j = 0; j < 4; j++) {
-//				for (int j2 = 0; j2 < map.get(i).get(j).size(); j2++) {
-//					System.out.println(map.get(i).get(j).poll());
-//				}
-//			}
-//		}
+		countFish();
+		System.out.println(ans);
+	}
+
+	private static void smellDown() {
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				if (smell[i][j] == 0) {
+					continue;
+				}
+				smell[i][j]--;
+			}
+		}
+	}
+
+	private static void countFish() {
+		for (int r = 0; r < 4; r++) {
+			for (int c = 0; c < 4; c++) {
+				ans += countMap[r][c];
+			}
+		}
+	}
+
+	private static void flushFish() {
+		for (int r = 0; r < 4; r++) {
+			for (int c = 0; c < 4; c++) {
+				// 해당 위치에서 모든 물고기에 만큼 돌림
+				int tmp = copyMap.get(r).get(c).size();
+				for (int i = 0; i < tmp; i++) {
+					map.get(r).get(c).add(copyMap.get(r).get(c).poll());
+					countMap[r][c]++;
+				}
+			}
+		}
+	}
+
+	private static void copyFish() {
+		copyMap = new ArrayList<>();
+		for (int i = 0; i < 4; i++) {
+			copyMap.add(new ArrayList<>());
+			for (int j = 0; j < 4; j++) {
+				copyMap.get(i).add(new ArrayDeque<>(map.get(i).get(j)));
+			}
+		}
 	}
 
 	private static void sharkEat() {
-		for (int i = 0; i < 3; i++) {
-			moveList.get(i);
+		for (int j = 0; j < 3; j++) {
+			int x = moveList.get(j)[0];
+			int y = moveList.get(j)[1];
+			if (countMap[x][y] != 0) {
+				smell[x][y] = 3;
+				countMap[x][y] = 0;
+				int size = map.get(x).get(y).size();
+				for (int i = 0; i < size; i++) {
+					map.get(x).get(y).poll();
+				}
+			}
 		}
+		sx = moveList.get(2)[0];
+		sy = moveList.get(2)[1];
 	}
 
-	private static void moveShark(int sx, int sy) {
+	private static void moveShark() {
 		List<int[]> list = new ArrayList<>();
-		list.add(new int[] { sx, sy });
-		dfs(list, 0, 0);
+		dfs(list, 0, sx, sy, -1);
 	}
 
-	private static void dfs(List<int[]> list1, int dist, int fish) {
-		if (dist == 3) {
+	private static void dfs(List<int[]> list1, int fish, int nx, int ny, int a) {
+		if (list1.size() == 3) {
 			if (fish >= maxFish) {
+				maxFish = fish;
 				moveList = list1;
+//				System.out.println(Arrays.toString(list1.get(0)));
+//				System.out.println(Arrays.toString(list1.get(1)));
+//				System.out.print(Arrays.toString(list1.get(2)));
+//				System.out.println(fish);
 			}
 			return;
 		}
-		for (int d = 3; d >= 0; d--) {
-			int nsx = list1.get(dist)[0] + dsc[d];
-			int nsy = list1.get(dist)[1] + dsr[d];
+		for (int d = 0; d < 4; d++) {
+			// 왔던길 안가기
+			// 제자리는 갈 수 있음
+
+			int nsx = nx + dsr[d];
+			int nsy = ny + dsc[d];
 			if (nsx >= 0 && nsx < 4 && nsy >= 0 && nsy < 4) {
-				list1.add(new int [] { list1.get(dist)[0] + dsc[d], list1.get(dist)[1] + dsr[d] });
-				dfs(list1, dist + 1, fish + countMap[nsx][nsy]);				
+				List<int[]> list = new ArrayList<>(list1);
+				list.add(new int[] { nsx, nsy });
+				if (a != -1 && list1.size() != 1 && (a + 2) % 4 == d) {
+					dfs(list, fish, nsx, nsy, d);
+				}else {
+					dfs(list, fish + countMap[nsx][nsy], nsx, nsy, d);
+				}
 			}
 		}
 	}
 
-	private static void moveFish(int sx, int sy) {
+	private static void moveFish() {
 		// 모든 4*4에서
 		for (int r = 0; r < 4; r++) {
 			for (int c = 0; c < 4; c++) {
 				// 해당 위치에서 모든 물고기에 만큼 돌림
 				int tmp = map.get(r).get(c).size();
-				out : for (int i = 0; i < tmp; i++) {
+				out: for (int i = 0; i < tmp; i++) {
 					// 물고기 하나 뽑아서 (그냥 물고기 방향임)
 					int d = map.get(r).get(c).poll();
 					// 8번 돌려
@@ -157,7 +190,7 @@ public class num23290_ {
 								(nr != sx || nc != sy)) { // 상어가 아니면
 							countMap[r][c]--; // 물고기 위치 --
 							countMap[nr][nc]++; // 물고기 이동할곳 ++
-							tmpQueue.add(new int[] {nr, nc, d}); // 물고기 추가
+							tmpQueue.add(new int[] { nr, nc, d }); // 물고기 추가
 							continue out;
 						}
 						d--;
@@ -165,7 +198,7 @@ public class num23290_ {
 							d += 8;
 						}
 					} // 8번 돌때까지 별 문제 없었으면 그냥 안움직이고 넘어감
-					tmpQueue.add(new int[] {r, c, d}); // 물고기 추가
+					tmpQueue.add(new int[] { r, c, d }); // 물고기 추가
 				}
 			}
 		}

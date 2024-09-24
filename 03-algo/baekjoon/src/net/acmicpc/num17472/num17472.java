@@ -7,16 +7,41 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
+import 그래프최소비용01_크루스칼.Edge;
+class Edge implements Comparable<Edge> {
+	int A, B, W;
+
+	public Edge(int a, int b, int w) {
+		super();
+		A = a;
+		B = b;
+		W = w;
+	}
+
+	@Override
+	public String toString() {
+		return "Edge [A=" + A + ", B=" + B + ", W=" + W + "]";
+	}
+
+	@Override
+	public int compareTo(Edge o) {
+		return this.W - o.W;
+//		return Integer.compare(this.W, o.W);
+	}
+}
 public class num17472 {
 	static boolean[][] visited;
 	static int[][] map;
 	static int[] dr = {-1, 1, 0, 0};
 	static int[] dc = {0, 0, -1, 1};
 	static int N, M, tmp;
+	static Edge[] arr;
 	
 	public static void main(String[] args) throws IOException {
 		System.setIn(new FileInputStream("data/input17472.txt"));
@@ -41,13 +66,7 @@ public class num17472 {
 				}
 			}
 		}
-		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < M; j++) {
-				if (map[i][j] != 0) {
-					
-				}
-			}
-		}
+		arr = new Edge[tmp - 1];
 		
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < M; j++) {
@@ -57,6 +76,9 @@ public class num17472 {
 			}
 		}
 		
+		for (Edge e : arr) {
+			System.out.println(e);
+		}
 		for (int i = 0; i < N; i++) {
 			System.out.println(Arrays.toString(map[i]));
 		}
@@ -67,18 +89,21 @@ public class num17472 {
 		out : for (int d = 0; d < 4; d++) {
 			int r = row;
 			int c = col;
+			int len = 0;
 			while (true) {
 				r = r + dr[d];
 				c = c + dc[d];
-				if (r < 0 && r >= N && c < 0 && c >= M
-						&& map[r][c] == now) {
+				len += 1;
+				if (r < 0 || r >= N || c < 0 || c >= M
+						|| map[r][c] == now) {
 					continue out;
 				}
-				if (map[r][c] != 0) {
+				if (map[r][c] > now) {
 					break;
 				}
 			}
-			
+			Edge e = new Edge(now - 1, map[r][c], len - 1);
+			arr[now - 2] = e;
 		}
 	}
 
@@ -101,5 +126,9 @@ public class num17472 {
 				}
 			}
 		}
+	}
+	
+	private static void makeSet(int x) {
+		
 	}
 }
