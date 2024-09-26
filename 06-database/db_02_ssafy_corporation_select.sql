@@ -153,8 +153,6 @@ SELECT empno, AVG(sal+comm)
 FROM emp
 WHERE ename IN ('smith','allen');
 
-
-
 SELECT COUNT(*), ROUND(AVG(sal+comm),2)
 FROM emp
 WHERE ename = 'allen';

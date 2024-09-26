@@ -24,5 +24,13 @@ create table board (
     
 );
 
-  --직접입력 받는것만 넣어놓고
-insert into board(title, content, writer, view_cnt, reg_date)
+#직접입력 받는것만 넣어놓는다.
+insert into board(title, content, writer)
+values ('연습', 'ssaft', '연습2입니다');
+
+commit;
+
+select * from board;
+
+
+

@@ -1,4 +1,4 @@
-package com.ssafy.exam.member.member.controller;
+package com.ssafy.exam.member.controller;
 
 import java.io.IOException;
 

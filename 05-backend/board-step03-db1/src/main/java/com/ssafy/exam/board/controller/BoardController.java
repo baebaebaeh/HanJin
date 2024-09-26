@@ -46,11 +46,9 @@ public class BoardController extends HttpServlet {
 		} else if ("write".equals(action)) {
 			// 등록 처리하자...
 			write(req, resp);
-		} else if ("detail".equals(action)) {
-			// 등록 처리하자...
+		} else if ("detail".equals(action)) { // 게시글 상세정보
 			detail(req, resp);
-		} else if ("delete".equals(action)) {
-			// 등록 처리하자...
+		} else if ("delete".equals(action)) { // 게시글 삭제
 			delete(req, resp);
 		} else if ("updateForm".equals(action)) {
 			// 등록 처리하자...
@@ -59,31 +57,14 @@ public class BoardController extends HttpServlet {
 			// 등록 처리하자...
 			update(req, resp);
 		}
+
 	}
 
-	private void update(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		String title = req.getParameter("title");
-		String writer = req.getParameter("writer");
-		String content = req.getParameter("content");
+	private void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// 삭제할 게시글 번호 가져오기
 		int no = Integer.parseInt(req.getParameter("no"));
 		try {
-			boardDao.updateBoard(no, title, writer, content);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		resp.sendRedirect(req.getContextPath() + "/board?action=list");
-	}
-
-	private void updateForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher rd = req.getRequestDispatcher("/board/update.jsp");
-		rd.forward(req, resp);
-	}
-
-	private void delete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		int no = Integer.parseInt(req.getParameter("no"));
-		try {
-			boardDao.deleteBoardByNo(no);
+			boardDao.deleteBoard(no);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -97,35 +78,31 @@ public class BoardController extends HttpServlet {
 		// 조회수 증가
 		try {
 			boardDao.updateViewCnt(no);
-			Board board;
-			board = boardDao.selectBoardByNo(no);
-			req.setAttribute("board", board); // 이거 다시 설명들어야겠다
+			// 게시글 조회
+			Board board = boardDao.selectBoardByNo(no);
+			req.setAttribute("board", board);
 			RequestDispatcher rd = req.getRequestDispatcher("/board/detail.jsp");
 			rd.forward(req, resp);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	private void list(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// 화면에 보여줄 데이터를 준비한다.
-		List<Board> list;
+		List<Board> list = null;
 		try {
 			list = boardDao.selectBoard();
-
-//		System.out.println(list);
-
-			// req 같이 볼 수 있는 영역에 올리자(공유영역)
-			req.setAttribute("list", list);
-
-			// 화면 페이지로 이동한다.(list.jsp)
-			RequestDispatcher rd = req.getRequestDispatcher("/board/list.jsp");
-			rd.forward(req, resp);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		// req 같이 볼 수 있는 영역에 올리자(공유영역)
+		req.setAttribute("list", list);
+
+		// 화면 페이지로 이동한다.(list.jsp)
+		RequestDispatcher rd = req.getRequestDispatcher("/board/list.jsp");
+		rd.forward(req, resp);
 	}
 
 	private void write(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -141,7 +118,6 @@ public class BoardController extends HttpServlet {
 		try {
 			boardDao.insertBoard(board);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		// 등록한다.
@@ -159,4 +135,22 @@ public class BoardController extends HttpServlet {
 		rd.forward(req, resp);
 	}
 
+	private void update(HttpServletRequest req, HttpServletResponse resp) throws IOException  {
+		String title = req.getParameter("title");
+		String writer = req.getParameter("writer");
+		String content = req.getParameter("content");
+		int no = Integer.parseInt(req.getParameter("no"));
+		try {
+			boardDao.updateBoard(no, title, writer, content);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		resp.sendRedirect(req.getContextPath() + "/board?action=list");
+	}
+
+	private void updateForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		RequestDispatcher rd = req.getRequestDispatcher("/board/update.jsp");
+		rd.forward(req, resp);
+	}
 }
