@@ -17,6 +17,4 @@ public interface BoardDAO {
 
 	void updateViewCnt(int no) throws SQLException;
 
-	void updateBoard(int no, String title, String writer, String content) throws SQLException;
-
 }

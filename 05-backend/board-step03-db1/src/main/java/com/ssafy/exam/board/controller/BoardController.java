@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.ssafy.exam.board.model.dao.BoardDAO;
-import com.ssafy.exam.board.model.dao.BoardDAOImpl;
 import com.ssafy.exam.board.model.dto.Board;
+import com.ssafy.exam.board.model.service.BoardService;
+import com.ssafy.exam.board.model.service.BoardServiceImpl;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -28,129 +28,100 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/board")
 public class BoardController extends HttpServlet {
 
-	private BoardDAO boardDao;
-
+	private BoardService boardService;
 	public BoardController() {
-		boardDao = BoardDAOImpl.getInstance();
+		boardService = BoardServiceImpl.getInstance();
 	}
-
+	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String action = req.getParameter("action");
-		if ("list".equals(action)) {
-			// 목록 페이지
-			list(req, resp);
-		} else if ("writeForm".equals(action)) {
-			// 등록폼 페이지 이동하자...
-			writeForm(req, resp);
-		} else if ("write".equals(action)) {
-			// 등록 처리하자...
-			write(req, resp);
-		} else if ("detail".equals(action)) { // 게시글 상세정보
-			detail(req, resp);
-		} else if ("delete".equals(action)) { // 게시글 삭제
-			delete(req, resp);
-		} else if ("updateForm".equals(action)) {
-			// 등록 처리하자...
-			updateForm(req, resp);
-		} else if ("update".equals(action)) {
-			// 등록 처리하자...
-			update(req, resp);
+		try {
+			String action = req.getParameter("action");
+			if ("list".equals(action)) {
+				// 목록 페이지
+				list(req, resp);
+			} else if ("writeForm".equals(action)) {
+				// 등록폼 페이지 이동하자...
+				writeForm(req, resp);
+			} else if ("write".equals(action)) {
+				// 등록 처리하자...
+				write(req, resp);
+			} else if ("detail".equals(action)) { // 게시글 상세정보
+				detail(req, resp);
+			} else if ("delete".equals(action)) { // 게시글 삭제
+				delete(req, resp);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			// 톰켓한테 예외를 만들어서 던진다.
+			throw new ServletException(e);
 		}
-
 	}
 
-	private void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	private void delete(HttpServletRequest req, HttpServletResponse resp) 
+		throws Exception {
 		// 삭제할 게시글 번호 가져오기
 		int no = Integer.parseInt(req.getParameter("no"));
-		try {
-			boardDao.deleteBoard(no);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		boardService.delete(no);
+
 		resp.sendRedirect(req.getContextPath() + "/board?action=list");
 	}
 
-	private void detail(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	private void detail(HttpServletRequest req, HttpServletResponse resp) 
+			throws Exception {
 		// 조회할 게시글 번호 가져오기
 		int no = Integer.parseInt(req.getParameter("no"));
 		// 조회수 증가
-		try {
-			boardDao.updateViewCnt(no);
-			// 게시글 조회
-			Board board = boardDao.selectBoardByNo(no);
-			req.setAttribute("board", board);
-			RequestDispatcher rd = req.getRequestDispatcher("/board/detail.jsp");
-			rd.forward(req, resp);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		Board board = boardService.detail(no);
+		req.setAttribute("board", board);
+		RequestDispatcher rd = req.getRequestDispatcher("/board/detail.jsp");
+		rd.forward(req, resp);
 	}
 
-	private void list(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	private void list(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		// 화면에 보여줄 데이터를 준비한다.
 		List<Board> list = null;
-		try {
-			list = boardDao.selectBoard();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
+		list = boardService.list();
+		
 		// req 같이 볼 수 있는 영역에 올리자(공유영역)
 		req.setAttribute("list", list);
-
+		
 		// 화면 페이지로 이동한다.(list.jsp)
 		RequestDispatcher rd = req.getRequestDispatcher("/board/list.jsp");
 		rd.forward(req, resp);
 	}
-
-	private void write(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	private void write(HttpServletRequest req, HttpServletResponse resp) 
+			throws Exception {
 		// 등록할 데이터를 파라미터에서 꺼낸다.
 		String title = req.getParameter("title");
 		String writer = req.getParameter("writer");
 		String content = req.getParameter("content");
-
+		
 		Board board = new Board();
 		board.setTitle(title);
 		board.setContent(content);
 		board.setWriter(writer);
-		try {
-			boardDao.insertBoard(board);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		boardService.write(board);
 		// 등록한다.
-		// http://localhost/board-step01-mvc/board
+		// http://localhost/board-step01-mvc/board     
 		// 목록 페이지로 이동한다.(목록에 필요한 데이터를 준비하는 서블릿으로 이동)
 //		RequestDispatcher rd = req.getRequestDispatcher("/board?action=list");
 //		rd.forward(req, resp);
-
+		
 		resp.sendRedirect(req.getContextPath() + "/board?action=list");
 	}
-
-	private void writeForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	private void writeForm(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		// 등록 페이지로 이동한다.
 		RequestDispatcher rd = req.getRequestDispatcher("/board/write.jsp");
 		rd.forward(req, resp);
 	}
-
-	private void update(HttpServletRequest req, HttpServletResponse resp) throws IOException  {
-		String title = req.getParameter("title");
-		String writer = req.getParameter("writer");
-		String content = req.getParameter("content");
-		int no = Integer.parseInt(req.getParameter("no"));
-		try {
-			boardDao.updateBoard(no, title, writer, content);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		resp.sendRedirect(req.getContextPath() + "/board?action=list");
-	}
-
-	private void updateForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher rd = req.getRequestDispatcher("/board/update.jsp");
-		rd.forward(req, resp);
-	}
+	
 }
+
+
+
+
+
+
+
+

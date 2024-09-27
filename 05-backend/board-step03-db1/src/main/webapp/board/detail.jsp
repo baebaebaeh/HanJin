@@ -32,7 +32,7 @@
 	</div>
 	<div class="board-detail">
 		<a href="${pageContext.request.contextPath}/board?action=delete&no=${board.no}">삭제</a>
-		<a href="${pageContext.request.contextPath}/board?action=delete&no=${board.no}">수정</a>
+		<a>수정</a>
 		<a href="${pageContext.request.contextPath}/board?action=list">목록</a>
 	</div>
 </body>

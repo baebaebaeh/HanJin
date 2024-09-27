@@ -75,7 +75,7 @@ SELECT abs(-10) AS '결과';
 SELECT POWER(2, 2) AS '2^2', POWER(2, 3) AS '2^3', POWER(2, 4) AS '2^4';
 
 # Q. 나의 BMI를 계산하여 소수점 첫번째 자리까지 출력해 봅시다.
-# hint. BMI 공식 몸무게(KG) / 키(M) * 키(M)
+# hint. BMI 공식 몸무게(KG) / (키(M) * 키(M))
 SELECT truncate(94 / POWER(1.92, 2), 1) AS 'BMI';
 
 # Q. person 테이블에서 MBTI를 중복제거 후 소문자로 변환하여 5개의 데이터만 출력해 봅시다.

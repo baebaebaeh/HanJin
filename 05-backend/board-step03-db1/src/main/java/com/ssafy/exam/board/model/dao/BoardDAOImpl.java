@@ -22,42 +22,44 @@ import com.ssafy.exam.util.DBUtil;
  * D : deleteBoard  
  */
 public class BoardDAOImpl implements BoardDAO {
-
+	
 	public static void main(String[] args) throws SQLException {
 		DBUtil dbUtil = DBUtil.getInstance();
 		Connection con = dbUtil.getConnection();
 		System.out.println(con);
 	}
-
+	
 	private static BoardDAO instance = new BoardDAOImpl();
-
-	private BoardDAOImpl() {
-	}
-
+	private BoardDAOImpl() {}
 	public static BoardDAO getInstance() {
 		return instance;
 	}
-
+	
 	@Override
 	public void insertBoard(Board board) throws SQLException {
 		DBUtil dbUtil = DBUtil.getInstance();
 		// 데이터베이스 연결하기
 		Connection con = dbUtil.getConnection();
-		String sql = "insert into board (title, writer, content) values (?, ?, ?)";
+		
+		String sql = "insert into board(title, writer, content) values(?, ?, ?)";
+		
 		PreparedStatement pstmt = con.prepareStatement(sql);
+		
 		pstmt.setString(1, board.getTitle());
 		pstmt.setString(2, board.getWriter());
 		pstmt.setString(3, board.getContent());
+		
 		pstmt.executeUpdate();
 	}
-
+	
 	@Override
 	public List<Board> selectBoard() throws SQLException {
 		List<Board> list = new ArrayList<>();
-
+		
 		DBUtil dbUtil = DBUtil.getInstance();
 		// 데이터베이스 연결하기
 		Connection con = dbUtil.getConnection();
+		
 		// 실행할 SQL 문 작성
 		String sql = "select no, title, writer, view_cnt from board order by no desc";
 		// SQL문을 실행할 객체를 얻어온다.
@@ -78,25 +80,24 @@ public class BoardDAOImpl implements BoardDAO {
 		}
 		return list;
 	}
-
+	
 	@Override
 	public Board selectBoardByNo(int no) throws SQLException {
-
 		DBUtil dbUtil = DBUtil.getInstance();
 		// 데이터베이스 연결하기
 		Connection con = dbUtil.getConnection();
+		
 		// 실행할 SQL 문 작성
-		// 값이 들어갈 자리는 ?를 준다.
 		String sql = "select no, title, writer, content, view_cnt from board where no = ?";
 		// SQL문을 실행할 객체를 얻어온다.
 		PreparedStatement pstmt = con.prepareStatement(sql);
-
+		
 		// SQL문을 실행 전에 ?에 값을 설정하자.
-		// pstmt.setInt(no의 ?번째, no)
 		pstmt.setInt(1, no);
-
+		
 		// SQL문 실행하기 : select(executeQuery), select절 이외(executeUpdate)
 		ResultSet rs = pstmt.executeQuery();
+		
 		if (rs.next()) {
 			String title = rs.getString("title");
 			String writer = rs.getString("writer");
@@ -112,37 +113,36 @@ public class BoardDAOImpl implements BoardDAO {
 		}
 		return null;
 	}
-
+	
 	@Override
 	public void deleteBoard(int no) throws SQLException {
 		DBUtil dbUtil = DBUtil.getInstance();
 		// 데이터베이스 연결하기
 		Connection con = dbUtil.getConnection();
+		
 		String sql = "delete from board where no = ?";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		pstmt.setInt(1, no);
 		pstmt.executeUpdate();
 	}
-
+	
 	@Override
 	public void updateViewCnt(int no) throws SQLException {
 		DBUtil dbUtil = DBUtil.getInstance();
 		// 데이터베이스 연결하기
 		Connection con = dbUtil.getConnection();
-
+		
 		String sql = "update board set view_cnt = view_cnt + 1 where no = ?";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		pstmt.setInt(1, no);
 		pstmt.executeUpdate();
 	}
-	@Override
-	public void updateBoard(int no, String title, String writer, String content) throws SQLException {
-		DBUtil dbUtil = DBUtil.getInstance();
-		// 데이터베이스 연결하기
-		Connection con = dbUtil.getConnection();
-		String sql = "delete from board where no = ?";
-		PreparedStatement pstmt = con.prepareStatement(sql);
-		pstmt.setInt(1, no);
-		pstmt.executeUpdate();
-	}
 }
+
+
+
+
+
+
+
+
