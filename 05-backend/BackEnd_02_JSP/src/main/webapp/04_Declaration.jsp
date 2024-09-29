@@ -2,8 +2,9 @@
 	pageEncoding="UTF-8"%>
 	
 <%! 
-	int A = 10;
+	int A;
 	int B = 20;
+	String D;
 	
 	String name = "SSAFY";
 	
@@ -32,7 +33,7 @@
 		out.print("<br>");
 		out.print(abs(C));
 		out.print("<br>");
-		
+		out.print(D);
 	
 	
 	

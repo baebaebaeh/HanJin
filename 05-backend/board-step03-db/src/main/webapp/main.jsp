@@ -13,7 +13,7 @@ application.setAttribute("a4", "b4");
 <c:set var="a4" value="b4" scope="application" />
 <c:set >
  --%>
-
+<% //주석 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"
 	scope="page" />
 <html>
