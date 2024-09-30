@@ -18,6 +18,8 @@ create table tb_user(
     is_user int not null default 1
 );
 
+insert into tb_user values ('123', '123', '1', '1');
+
 create table tb_review (
     review_no int PRIMARY KEY AUTO_INCREMENT,
     review_id VARCHAR(300) NOT NULL,
