@@ -50,7 +50,14 @@ User user = (User) session.getAttribute("memberInfo");
 
 <!doctype html>
 <html lang="en">
-
+<style>
+.link-primary {
+  all: unset; /* 모든 기본 스타일을 제거 */
+  display: inline-block; /* 버튼이 차지하는 공간을 유지 */
+  cursor: pointer; /* 버튼 위에 마우스를 올리면 커서가 손가락 모양으로 바뀜 */
+  text-align: center; /* 텍스트 가운데 정렬 */
+}
+</style>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -66,7 +73,7 @@ User user = (User) session.getAttribute("memberInfo");
 <body>
 	<%@ include file="/include/header.jsp"%>
 
-	<%=request.getContextPath()%>
+	${pageContext.request.contextPath}
 
 	<!--  Body Wrapper -->
 	<div class="page-wrapper" id="main-wrapper" data-layout="vertical"
@@ -106,13 +113,13 @@ User user = (User) session.getAttribute("memberInfo");
 						<!-- 로그인 상태에 따라 링크를 표시 -->
 						<c:if test="${empty sessionScope.memberInfo}">
 							<li class="sidebar-item"><a class="sidebar-link"
-								href="<%=request.getContextPath()%>/main?action=signInForm"
+								href="${pageContext.request.contextPath}/main?action=signInForm"
 								aria-expanded="false"> <span> <iconify-icon
 											icon="solar:login-3-bold-duotone" class="fs-6"></iconify-icon>
 								</span> <span class="hide-menu">Login</span>
 							</a></li>
 							<li class="sidebar-item"><a class="sidebar-link"
-								href="<%=request.getContextPath()%>/main?action=signUpForm"
+								href="${pageContext.request.contextPath}/main?action=signUpForm"
 								aria-expanded="false"> <span> <iconify-icon
 											icon="solar:user-plus-rounded-bold-duotone" class="fs-6"></iconify-icon>
 								</span> <span class="hide-menu">Register</span>
@@ -122,7 +129,7 @@ User user = (User) session.getAttribute("memberInfo");
 						<!-- 로그인한 경우 Logout 링크 표시 -->
 						<c:if test="${not empty sessionScope.memberInfo}">
 							<li class="sidebar-item"><a class="sidebar-link"
-								href="<%=request.getContextPath()%>/main?action=logout"
+								href="${pageContext.request.contextPath}/main?action=signOut"
 								aria-expanded="false"> <span> <iconify-icon
 											icon="solar:logout-bold-duotone" class="fs-6"></iconify-icon>
 								</span> <span class="hide-menu">Logout</span>
@@ -183,7 +190,7 @@ User user = (User) session.getAttribute("memberInfo");
 												class="d-flex align-items-center gap-2 dropdown-item"> <i
 												class="ti ti-list-check fs-6"></i>
 												<p class="mb-0 fs-3">My Task</p>
-											</a> <a href="./authentication-login.html"
+											</a> <a href="${pageContext.request.contextPath}/main?action=signOut"
 												class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
 										</div>
 									</div></li>
@@ -233,92 +240,45 @@ User user = (User) session.getAttribute("memberInfo");
 
 						</div>
 					</div>
+					
+					<c:forEach var="video" items="${videos}">
 					<div class="col-lg-4">
 						<div class="card overflow-hidden hover-img">
 							<div class="position-relative">
 								<a href="javascript:void(0)"> <img
 									src="${pageContext.request.contextPath}/SEODash-1.0.0/src/assets/images/logos/wo3.png"
 									class="card-img-top" alt="matdash-img">
-								</a> <span
-									class="badge text-bg-light text-dark fs-2 lh-sm mb-9 me-9 py-1 px-2 fw-semibold position-absolute bottom-0 end-0">27
-									min </span>
+								</a> 
+								<span class="badge text-bg-light text-dark fs-2 lh-sm mb-9 me-9 py-1 px-2 fw-semibold position-absolute bottom-0 end-0">
+									${video.videoLength}
+								</span>
 							</div>
+							<form method="post" action="${pageContext.request.contextPath}/main">
+							<input type="hidden" name="action" value="reviewForm">
+							<input type="hidden" name="videoId" value="${video.videoId}">
 							<div class="card-body p-4">
-								<span class="badge text-bg-light fs-2 py-1 px-2 lh-sm  mt-3">#어깨
-									#골반</span> <a
-									class="d-block my-4 fs-5 text-dark fw-semibold link-primary"
-									href="review1.html">"뭉친 어깨, 뻣뻣한 골반 풀어주는 요가 | 앉아서 하는 요가 스트레칭
-									| 어깨 근육 풀기, 골반풀기"</a>
+								<span class="badge text-bg-light fs-2 py-1 px-2 lh-sm  mt-3">
+									${video.videoPart}
+								</span>
+								<button class="d-block my-4 fs-5 text-dark fw-semibold link-primary">
+									${video.videoTitle}
+								</button>
 								<div class="d-flex align-items-center gap-4">
 									<div class="d-flex align-items-center gap-2">
-										<i class="ti ti-eye text-dark fs-5"></i>9,125
+										<i class="ti ti-eye text-dark fs-5"></i>${video.videoViewcnt}
 									</div>
 									<div class="d-flex align-items-center gap-2">
-										<i class="ti ti-message-2 text-dark fs-5"></i>3
+										<i class="ti ti-message-2 text-dark fs-5"></i>${video.videoReviewcnt}
 									</div>
 									<div class="d-flex align-items-center fs-2 ms-auto">
 										<i class="ti ti-point text-dark"></i>Mon, Dec 19
 									</div>
 								</div>
 							</div>
+							</form>
 						</div>
 					</div>
-					<div class="col-lg-4">
-						<div class="card overflow-hidden hover-img">
-							<div class="position-relative">
-								<a href="javascript:void(0)"> <img
-									src="${pageContext.request.contextPath}/SEODash-1.0.0/src/assets/images/logos/wo2.png"
-									class="card-img-top" alt="matdash-img">
-								</a> <span
-									class="badge text-bg-light text-dark fs-2 lh-sm mb-9 me-9 py-1 px-2 fw-semibold position-absolute bottom-0 end-0">16
-									min</span>
-							</div>
-							<div class="card-body p-4">
-								<span class="badge text-bg-light fs-2 py-1 px-2 lh-sm  mt-3">#하체</span>
-								<a class="d-block my-4 fs-5 text-dark fw-semibold link-primary"
-									href="">저는 하체 식주의자 입니다</a>
-								<div class="d-flex align-items-center gap-4">
-									<div class="d-flex align-items-center gap-2">
-										<i class="ti ti-eye text-dark fs-5"></i>4,150
-									</div>
-									<div class="d-flex align-items-center gap-2">
-										<i class="ti ti-message-2 text-dark fs-5"></i>38
-									</div>
-									<div class="d-flex align-items-center fs-2 ms-auto">
-										<i class="ti ti-point text-dark"></i>Sun, Dec 18
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4">
-						<div class="card overflow-hidden hover-img">
-							<div class="position-relative">
-								<a href="javascript:void(0)"> <img
-									src="${pageContext.request.contextPath}/SEODash-1.0.0/src/assets/images/logos/wo1.png"
-									class="card-img-top" alt="matdash-img">
-								</a> <span
-									class="badge text-bg-light text-dark fs-2 lh-sm mb-9 me-9 py-1 px-2 fw-semibold position-absolute bottom-0 end-0">16
-									min</span>
-							</div>
-							<div class="card-body p-4">
-								<span class="badge text-bg-light fs-2 py-1 px-2 lh-sm  mt-3">#유산소</span>
-								<a class="d-block my-4 fs-5 text-dark fw-semibold link-primary"
-									href="">빠르게 칼로리 버닝 - 서서하는 유산소 - 다이어트 운동</a>
-								<div class="d-flex align-items-center gap-4">
-									<div class="d-flex align-items-center gap-2">
-										<i class="ti ti-eye text-dark fs-5"></i>9,480
-									</div>
-									<div class="d-flex align-items-center gap-2">
-										<i class="ti ti-message-2 text-dark fs-5"></i>12
-									</div>
-									<div class="d-flex align-items-center fs-2 ms-auto">
-										<i class="ti ti-point text-dark"></i>Sat, Dec 17
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+					</c:forEach>
 					<div class="py-6 px-6 text-center">
 						<p>&copy; Design and Developed by DAEJEON CLASS-4 SOUN,
 							SEOUNGHO, MINA</p>

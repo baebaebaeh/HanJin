@@ -14,4 +14,5 @@ public interface UserDAO {
 	
 	boolean forgotPassword(String userEmail, String userName, String userPassword) throws SQLException;
  
+	
 }

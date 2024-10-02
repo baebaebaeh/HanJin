@@ -2,10 +2,14 @@ package com.ssafy.gt.main.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import com.ssafy.gt.user.model.dao.UserDAO;
 import com.ssafy.gt.user.model.dao.UserDAOImpl;
+import com.ssafy.gt.user.model.dao.VideoDAO;
+import com.ssafy.gt.user.model.dao.VideoDAOImpl;
 import com.ssafy.gt.user.model.dto.User;
+import com.ssafy.gt.user.model.dto.Video;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -20,6 +24,7 @@ import jakarta.websocket.Session;
 public class MainFrontServlet extends HttpServlet {
 
 	private UserDAO userDao = UserDAOImpl.getInstance();
+	private VideoDAO videoDao = VideoDAOImpl.getInstance();
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -62,11 +67,45 @@ public class MainFrontServlet extends HttpServlet {
 				updatePassword(req, resp);
 				break;
 			}
+			case "writeReview": {
+				writeReview(req, resp);
+				break;
+			}
+			case "viewReview": {
+				viewReview(req, resp);
+				break;
+			}
+			case "reviewForm": {
+				reviewForm(req, resp);
+				break;
+			}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ServletException(e);
 		}
+	}
+
+	private void reviewForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
+		RequestDispatcher rd = req.getRequestDispatcher("/review/review2.jsp");
+		String id = req.getParameter("videoId");
+		Video video = videoDao.searchById(id);
+		req.setAttribute("video", video);
+		rd.forward(req, resp);
+	}
+
+	private void viewReview(HttpServletRequest req, HttpServletResponse resp) {
+		
+	}
+
+	private void writeReview(HttpServletRequest req, HttpServletResponse resp) {
+		HttpSession session = req.getSession();
+		User user = (User) session.getAttribute("memberInfo");
+		String reviewTitle = req.getParameter("reviewTitle");
+		String reviewContent = req.getParameter("reviewContent");
+		String reviewScore = req.getParameter("reviewScore");
+        String reviewEmail = req.getParameter("reviewEmail");
+        
 	}
 
 	private void updatePassword(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
@@ -171,7 +210,10 @@ public class MainFrontServlet extends HttpServlet {
 		rd.forward(req, resp);
 	}
 
-	private void main(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	private void main(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
+		List<Video> videos = videoDao.selectAll();
+		req.setAttribute("videos", videos);
+		System.out.println(videos.size());
 		RequestDispatcher rd = req.getRequestDispatcher("/main.jsp");
 		rd.forward(req, resp);
 	}
