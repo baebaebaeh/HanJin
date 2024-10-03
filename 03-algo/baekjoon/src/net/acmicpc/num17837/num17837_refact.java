@@ -3,13 +3,12 @@ package net.acmicpc.num17837;
 import java.io.*;
 import java.util.*;
 
-public class num17837 {
+public class num17837_refact {
 	static int N, K, turn;
 	static int[][] color, count;
 	static List<List<Queue<Integer>>> map;
 	static List<Stack<Integer>> location;
-	static Queue<Integer> queue;
-	static Stack<Integer> stack;
+	static Deque<Integer> deque;
 	static int[] dr = { -1, 0, 1, 0 }; // 상 우 하 좌
 	static int[] dc = { 0, 1, 0, -1 };
 
@@ -24,8 +23,7 @@ public class num17837 {
 		color = new int[N][N];
 		count = new int[N][N];
 		map = new ArrayList<>();
-		stack = new Stack<>();
-		queue = new ArrayDeque<>();
+		deque = new ArrayDeque<>();
 		location = new ArrayList<>();
 		for (int i = 0; i < K; i++) {
 			location.add(new Stack<>());
@@ -80,7 +78,7 @@ public class num17837 {
 		// 0흰 1빨 2파
 		// 출력이 1000넘으면 -1
 		// 상우하좌
-		out2 : while (true) {
+		out2: while (true) {
 			turn++;
 			out: for (int i = 0; i < K; i++) {
 //				for (int[] a : count)
@@ -126,85 +124,44 @@ public class num17837 {
 						break;
 					map.get(r).get(c).add(idx);
 				}
-				// 다음 위치가 빨간색이면
-				// stack에 넣어서 위치를 뒤바꿔 줄거다.
-				if (color[nr][nc] == 1) {
-					// 원하는 idx가 나오면 stack에다 담은후
-					// 다음 위치에 넣어준다.
-					stack.add(i);
-					// 위치 업데이트
-					location.get(i).add(d);
-					location.get(i).add(nr);
-					location.get(i).add(nc);
-					count[r][c]--;
-					count[nr][nc]++;
-					if (count[nr][nc] >= 4) {
-						System.out.println(turn);
-						return;
-					}
-					while (!map.get(r).get(c).isEmpty()) {
-						int tmpIdx = map.get(r).get(c).peek();
-						if (tmpIdx != startIdx) {
-							int idx = map.get(r).get(c).poll();
-							stack.add(idx);
-							// 위치 업데이트
-							int tmpC = location.get(idx).pop();
-							int tmpR = location.get(idx).pop();
-							location.get(idx).add(tmpR + dr[d]);
-							location.get(idx).add(tmpC + dc[d]);
-							count[tmpR][tmpC]--;
-							count[tmpR + dr[d]][tmpC + dc[d]]++;
-							if (count[tmpR + dr[d]][tmpC + dc[d]] >= 4) {
-								System.out.println(turn);
-								return;
-							}
-							continue;
+				// 다음 위치에 넣어준다.
+				deque.add(i);
+				// 위치 업데이트
+				location.get(i).add(d);
+				location.get(i).add(nr);
+				location.get(i).add(nc);
+				count[r][c]--;
+				count[nr][nc]++;
+				if (count[nr][nc] >= 4) {
+					break out2;
+				}
+				while (!map.get(r).get(c).isEmpty()) {
+					int tmpIdx = map.get(r).get(c).peek();
+					if (tmpIdx != startIdx) {
+						int idx = map.get(r).get(c).poll();
+						deque.add(idx);
+						// 위치 업데이트
+						int tmpC = location.get(idx).pop();
+						int tmpR = location.get(idx).pop();
+						location.get(idx).add(tmpR + dr[d]);
+						location.get(idx).add(tmpC + dc[d]);
+						count[tmpR][tmpC]--;
+						count[tmpR + dr[d]][tmpC + dc[d]]++;
+						if (count[tmpR + dr[d]][tmpC + dc[d]] >= 4) {
+							break out2;
 						}
-						break;
+						continue;
 					}
-					while (!stack.isEmpty()) {
-						int idx = stack.pop();
+					break;
+				}
+				if (color[nr][nc] == 1) {
+					while (!deque.isEmpty()) {
+						int idx = deque.pollLast();
 						map.get(nr).get(nc).add(idx);
 					}
-				}
-				// 다음 위치가 흰색이면
-				// queue에 그냥 다음 위치에 넣어줄거다.
-				if (color[nr][nc] == 0) {
-					// 원하는 idx가 나오면 stack에다 담은후
-					// 다음 위치에 넣어준다.
-					queue.add(i);
-					// 위치 업데이트
-					location.get(i).add(d);
-					location.get(i).add(nr);
-					location.get(i).add(nc);
-					count[r][c]--;
-					count[nr][nc]++;
-					if (count[nr][nc] >= 4) {
-						System.out.println(turn);
-						return;
-					}
-					while (!map.get(r).get(c).isEmpty()) {
-						int tmpIdx = map.get(r).get(c).peek();
-						if (tmpIdx != startIdx) {
-							int idx = map.get(r).get(c).poll();
-							queue.add(idx);
-							// 위치 업데이트
-							int tmpC = location.get(idx).pop();
-							int tmpR = location.get(idx).pop();
-							location.get(idx).add(tmpR + dr[d]);
-							location.get(idx).add(tmpC + dc[d]);
-							count[tmpR][tmpC]--;
-							count[tmpR + dr[d]][tmpC + dc[d]]++;
-							if (count[tmpR + dr[d]][tmpC + dc[d]] >= 4) {
-								System.out.println(turn);
-								return;
-							}
-							continue;
-						}
-						break;
-					}
-					while (!queue.isEmpty()) {
-						int idx = queue.poll();
+				} else {
+					while (!deque.isEmpty()) {
+						int idx = deque.poll();
 						map.get(nr).get(nc).add(idx);
 					}
 				}
