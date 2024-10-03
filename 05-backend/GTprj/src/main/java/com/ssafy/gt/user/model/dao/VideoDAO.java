@@ -12,4 +12,6 @@ public interface VideoDAO {
 	boolean add(Video video) throws SQLException;
 	
 	List<Video> selectAll() throws SQLException;
+	
+	boolean reviewCntUp(String videoId) throws SQLException;
 }

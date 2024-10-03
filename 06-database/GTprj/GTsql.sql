@@ -29,6 +29,21 @@ INSERT INTO tb_video (
             "Mindful Yoga with Eileen",
             1
 );
+select *
+FROM tb_video;
+INSERT INTO tb_video (
+	video_id,
+    video_title,
+    video_part,
+    channel_name,
+    video_length
+) VALUES (
+            "-b4dcdZ6AOM",
+            "27만원 차이 😂 맥북 에어 8기가 모델로 사도 괜찮을까? 16기가 올릴까? 보고 결정하세요",
+            "상체",
+            "Mindful Yoga with Eileen",
+            1
+);
 INSERT INTO tb_video (
 	video_id,
     video_title,
@@ -42,6 +57,10 @@ INSERT INTO tb_video (
             "Mindful Yoga with Eileen",
             1
 );
+UPDATE tb_video set review_cnt = (SELECT review_cnt FROM tb_review WHERE review_id = "-b4dcdZ6AOM") + 1 WHERE review_id = "utIbM9Iua-k";
+SELECT review_cnt FROM tb_review WHERE review_id = '-b4dcdZ6AOM';
+select *
+FROM tb_review;
 create table tb_user(
     user_email varchar(300) primary key,
     user_password VARCHAR(300) not null,
@@ -70,3 +89,6 @@ create table tb_video_mark (
     FOREIGN KEY (user_email) REFERENCES tb_user(user_email) ON DELETE CASCADE,
     FOREIGN KEY (video_id) REFERENCES tb_video(video_id) ON DELETE CASCADE
 )
+
+		sql = "SET @videoreviewcnt = (SELECT video_reviewcnt FROM tb_video WHERE video_id = ?);\r\n"
+				+ "UPDATE tb_video SET video_reviewcnt = @videoreviewcnt + 1 WHERE video_id = ?;";

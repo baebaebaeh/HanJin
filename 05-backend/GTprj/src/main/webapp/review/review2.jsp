@@ -116,6 +116,7 @@
                 <h2>리뷰를 쓰세요</h2>
                 <form method="post" action="${pageContext.request.contextPath}/main">
                 	<input type="hidden" name="action" value="writeReview">
+                	<input type="hidden" name="videoId" value="${video.videoId}">
                     <input type="text" name="reviewTitle" placeholder="리뷰 제목" required>
                     <input type="text" name="reviewContent" placeholder="리뷰 내용" required>
                     <input type="number" name="reviewScore" placeholder="별점 (0-5)" min="0" max="5" required>
@@ -123,24 +124,35 @@
                 </form>
             </div>
         </div>
-    		<%-- <c:forEach var="video" items="${video}">
-    			https://www.youtube.com/embed/${video.videoId}
+    		<c:forEach var="review" items="${reviews}">
+    		<hr>
+	    		<div id="reviewList">
+		        	<h3>${review.reviewTitle}</h3>
+		            <p>${review.reviewContent}</p>
+		            <p>Rating: ${review.reviewScore}/5</p>
+		            <div class="review-actions">
+		            	<form method = "post" action="${pageContext.request.contextPath}/main"
+		            	style="display:inline">
+		            	<input type="hidden" name="action" value="viewReview">
+		            	<input type="hidden" name="videoId" value="${video.videoId}">
+		                <button>View</button>
+		            	</form>
+		            	<form method = "post" action="${pageContext.request.contextPath}/main"
+		            	style="display:inline">
+		            	<input type="hidden" name="action" value="viewReview">
+		            	<input type="hidden" name="videoId" value="${video.videoId}">
+		                <button>Edit</button>
+		            	</form>
+		            	<form method = "post" action="${pageContext.request.contextPath}/main"
+		            	style="display:inline">
+		            	<input type="hidden" name="action" value="viewReview">
+		            	<input type="hidden" name="videoId" value="${video.videoId}">
+		                <button>Delete</button>
+		            	</form>
+		            </div>
+	       		</div>       
 			</c:forEach>
-        <c:forEach var="b" items="${list}">
-        <div id="reviewList">
-        	<h3>${b.title}</h3>
-            <p class="review-content hidden">${b.content}</p>
-            <p class="review-rating hidden">Rating: ${b.rating}/5</p>
-            <div class="review-actions">
-                <button onclick="viewReview(${index})">View</button>
-                <button onclick="editReview(${index})">Edit</button>
-                <button onclick="deleteReview(${index})">Delete</button>
-            </div>
-        </div>        
-        </c:forEach> --%>
-    </div>
-    
-    
+   		</div>
 	<script>
         let reviews = [];
         let editingIndex = -1;

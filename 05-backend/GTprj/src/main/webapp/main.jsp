@@ -64,20 +64,15 @@ User user = (User) session.getAttribute("memberInfo");
 <title>SSAFIT DAEJEON 4반</title>
 <link rel="shortcut icon" type="image/png"
 	href="${pageContext.request.contextPath}/SEODash-1.0.0/src/assets/images/logos/image.png" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/SEODash-1.0.0/src/assets/css/styles.min.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/SEODash-1.0.0/src/assets/css/styles.min.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/SEODash-1.0.0/src/assets/css/rotate.css">
 </head>
 
 <body>
-	<%@ include file="/include/header.jsp"%>
-
-	${pageContext.request.contextPath}
-
 	<!--  Body Wrapper -->
-	<div class="page-wrapper" id="main-wrapper" data-layout="vertical"
-		data-navbarbg="skin6" data-sidebartype="full"
+	<div class="page-wrapper" id="main-wrapper" data-layout="vertical" 
+	data-navbarbg="skin6" data-sidebartype="full"
 		data-sidebar-position="fixed" data-header-position="fixed">
 		<!-- Sidebar Start -->
 		<aside class="left-sidebar">
@@ -245,16 +240,15 @@ User user = (User) session.getAttribute("memberInfo");
 					<div class="col-lg-4">
 						<div class="card overflow-hidden hover-img">
 							<div class="position-relative">
-								<a href="javascript:void(0)"> <img
-									src="${pageContext.request.contextPath}/SEODash-1.0.0/src/assets/images/logos/wo3.png"
-									class="card-img-top" alt="matdash-img">
+								<a href="javascript:void(0)">
+								                            <iframe width="300" height="150" src="https://www.youtube.com/embed/${video.videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 								</a> 
 								<span class="badge text-bg-light text-dark fs-2 lh-sm mb-9 me-9 py-1 px-2 fw-semibold position-absolute bottom-0 end-0">
 									${video.videoLength}
 								</span>
 							</div>
 							<form method="post" action="${pageContext.request.contextPath}/main">
-							<input type="hidden" name="action" value="reviewForm">
+							<input type="hidden" name="action" value="videoCntUp">
 							<input type="hidden" name="videoId" value="${video.videoId}">
 							<div class="card-body p-4">
 								<span class="badge text-bg-light fs-2 py-1 px-2 lh-sm  mt-3">

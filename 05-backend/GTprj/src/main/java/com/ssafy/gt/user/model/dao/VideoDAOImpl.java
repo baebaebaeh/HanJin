@@ -82,7 +82,6 @@ public class VideoDAOImpl implements VideoDAO {
 	}
 	@Override
 	public List<Video> selectAll() throws SQLException {
-		Video video = new Video();
 		List<Video> videos = new ArrayList<>();
 		DBUtil dbUtil = DBUtil.getInstance();
 		Connection con = dbUtil.getConnection();
@@ -90,6 +89,7 @@ public class VideoDAOImpl implements VideoDAO {
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		ResultSet rs = pstmt.executeQuery();
 		while (rs.next()) {
+			Video video = new Video();
 			String videoId = rs.getString("video_id");
 			String videoTitle = rs.getString("video_title");
 			String videoPart = rs.getString("video_part");
@@ -107,6 +107,21 @@ public class VideoDAOImpl implements VideoDAO {
 			videos.add(video);
 		}
 		return videos;
+	}
+	@Override
+	public boolean reviewCntUp(String videoId) throws SQLException {
+		DBUtil dbUtil = DBUtil.getInstance();
+		Connection con = dbUtil.getConnection();
+		String sql = "SET @viewcnt = (SELECT video_viewcnt FROM tb_video WHERE video_id = ?);\r\n"
+				+ "\r\n"
+				+ "UPDATE tb_video \r\n"
+				+ "SET video_viewcnt = @viewcnt + 1 \r\n"
+				+ "WHERE video_id = ?;";
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, videoId);
+		pstmt.setString(2, videoId);
+		pstmt.executeUpdate();
+		return true;
 	}
 	
 	

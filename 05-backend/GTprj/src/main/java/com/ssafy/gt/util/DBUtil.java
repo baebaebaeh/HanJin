@@ -11,7 +11,7 @@ public class DBUtil {
      * url은 jdbc:mysql://[host][:port]/[database][?propertyName1][=propertyValue1]형태로 작성한다.
      * serverTimezone=UTC 설정이 없으면 오류가 발생하므로 주의한다.
      */
-	private static final String url = "jdbc:mysql://localhost:3306/gt?serverTimezone=UTC";
+	private static final String url = "jdbc:mysql://localhost:3306/gt?serverTimezone=UTC&allowMultiQueries=true";
 	private static final String username = "ssafy";
 	private static final String password = "ssafy";
 	private static final String driverName = "com.mysql.cj.jdbc.Driver";
