@@ -69,7 +69,7 @@
 						<div class="card mb-0">
 							<div class="card-body">
 								<a
-									href="${pageContext.request.contextPath}/main?action=updatePassword"
+									href="${pageContext.request.contextPath}/main"
 									class="text-nowrap logo-img text-center d-block py-3 w-100">
 									<img
 									src="${pageContext.request.contextPath}/SEODash-1.0.0/src/assets/images/logos/SSAFIT.PNG"

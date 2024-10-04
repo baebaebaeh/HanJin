@@ -88,7 +88,21 @@ create table tb_video_mark (
     video_id VARCHAR(300) not null,
     FOREIGN KEY (user_email) REFERENCES tb_user(user_email) ON DELETE CASCADE,
     FOREIGN KEY (video_id) REFERENCES tb_video(video_id) ON DELETE CASCADE
-)
-
+);
+insert into tb_review(
+	review_id,
+	review_title, 
+	review_content, 
+	review_score,
+	review_email,
+	review_user_name
+) values (
+	?,
+	?,
+	?,
+	?,
+	?,
+	?
+);
 		sql = "SET @videoreviewcnt = (SELECT video_reviewcnt FROM tb_video WHERE video_id = ?);\r\n"
 				+ "UPDATE tb_video SET video_reviewcnt = @videoreviewcnt + 1 WHERE video_id = ?;";

@@ -36,7 +36,7 @@ public class VideoDAOImpl implements VideoDAO {
 			String videoPart = rs.getString("video_part");
 			String channelName = rs.getString("channel_name");
 			int videoViewcnt = rs.getInt("video_viewcnt");
-			int videoLength = rs.getInt("video_length");
+			String videoLength = rs.getString("video_length");
 			int videoReviewcnt = rs.getInt("video_reviewcnt");
 			video.setVideoId(videoId);
 			video.setVideoTitle(videoTitle);
@@ -55,7 +55,7 @@ public class VideoDAOImpl implements VideoDAO {
 		String part = video.getVideoPart();
 		String channelName = video.getChannelName();
 		int viewCnt = video.getVideoViewcnt();
-		int length = video.getVideoLength();
+		String length = video.getVideoLength();
 		int reviewCnt = video.getVideoReviewcnt();
 		DBUtil dbUtil = DBUtil.getInstance();
 		Connection con = dbUtil.getConnection();
@@ -76,7 +76,7 @@ public class VideoDAOImpl implements VideoDAO {
 		pstmt.setString(1, id);
 		pstmt.setString(2, title);
 		pstmt.setString(3, part);
-		pstmt.setInt(4, length);
+		pstmt.setString(4, length);
 		pstmt.setString(5, channelName);
 		return true;
 	}
@@ -95,7 +95,7 @@ public class VideoDAOImpl implements VideoDAO {
 			String videoPart = rs.getString("video_part");
 			String channelName = rs.getString("channel_name");
 			int videoViewcnt = rs.getInt("video_viewcnt");
-			int videoLength = rs.getInt("video_length");
+			String videoLength = rs.getString("video_length");
 			int videoReviewcnt = rs.getInt("video_reviewcnt");
 			video.setVideoId(videoId);
 			video.setVideoTitle(videoTitle);
@@ -109,13 +109,28 @@ public class VideoDAOImpl implements VideoDAO {
 		return videos;
 	}
 	@Override
-	public boolean reviewCntUp(String videoId) throws SQLException {
+	public boolean viewCntUp(String videoId) throws SQLException {
 		DBUtil dbUtil = DBUtil.getInstance();
 		Connection con = dbUtil.getConnection();
 		String sql = "SET @viewcnt = (SELECT video_viewcnt FROM tb_video WHERE video_id = ?);\r\n"
 				+ "\r\n"
 				+ "UPDATE tb_video \r\n"
 				+ "SET video_viewcnt = @viewcnt + 1 \r\n"
+				+ "WHERE video_id = ?;";
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, videoId);
+		pstmt.setString(2, videoId);
+		pstmt.executeUpdate();
+		return true;
+	}
+	@Override
+	public boolean viewCntDown(String videoId) throws SQLException {
+		DBUtil dbUtil = DBUtil.getInstance();
+		Connection con = dbUtil.getConnection();
+		String sql = "SET @viewcnt = (SELECT video_reviewcnt FROM tb_video WHERE video_id = ?);\r\n"
+				+ "\r\n"
+				+ "UPDATE tb_video \r\n"
+				+ "SET video_reviewcnt = @viewcnt - 1 \r\n"
 				+ "WHERE video_id = ?;";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, videoId);

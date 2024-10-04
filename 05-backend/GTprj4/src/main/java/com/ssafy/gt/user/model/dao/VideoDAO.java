@@ -1,0 +1,17 @@
+package com.ssafy.gt.user.model.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.ssafy.gt.user.model.dto.Video;
+
+public interface VideoDAO {
+	
+	Video searchById(String id) throws SQLException;
+
+	boolean add(Video video) throws SQLException;
+	
+	List<Video> selectAll() throws SQLException;
+	
+	boolean reviewCntUp(String videoId) throws SQLException;
+}

@@ -103,7 +103,16 @@ User user = (User) session.getAttribute("memberInfo");
 						</a></li>
 						<li class="nav-small-cap"><iconify-icon
 								icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-6"></iconify-icon>
-							<span class="hide-menu">AUTH</span></li>
+							<span class="hide-menu">MENU</span></li>
+							
+						<!-- 네이버 지도 -->
+						<li class="sidebar-item">
+						    <a class="sidebar-link" href="<%=request.getContextPath()%>/main?action=map" aria-expanded="false">
+						        <img src="${pageContext.request.contextPath}/SEODash-1.0.0/src/assets/images/logos/map.png" alt="Map Icon" style="width: 20px; height: 20px; margin-right: 8px; margin-left: 10px">
+						        <span class="hide-menu">Map</span>
+						    </a>
+						</li>
+							
 
 						<!-- 로그인 상태에 따라 링크를 표시 -->
 						<c:if test="${empty sessionScope.memberInfo}">
@@ -240,8 +249,11 @@ User user = (User) session.getAttribute("memberInfo");
 					<div class="col-lg-4">
 						<div class="card overflow-hidden hover-img">
 							<div class="position-relative">
-								<a href="javascript:void(0)">
-								                            <iframe width="300" height="150" src="https://www.youtube.com/embed/${video.videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+								<a href="javascript:void(0)"> 
+								<img id="video-thumbnail" 
+         src="https://img.youtube.com/vi/${video.videoId}/hqdefault.jpg" 
+         style="width: 100%; height: 100%; cursor: pointer;"
+         alt="Video Thumbnail" />
 								</a> 
 								<span class="badge text-bg-light text-dark fs-2 lh-sm mb-9 me-9 py-1 px-2 fw-semibold position-absolute bottom-0 end-0">
 									${video.videoLength}
@@ -264,9 +276,7 @@ User user = (User) session.getAttribute("memberInfo");
 									<div class="d-flex align-items-center gap-2">
 										<i class="ti ti-message-2 text-dark fs-5"></i>${video.videoReviewcnt}
 									</div>
-									<div class="d-flex align-items-center fs-2 ms-auto">
-										<i class="ti ti-point text-dark"></i>Mon, Dec 19
-									</div>
+									
 								</div>
 							</div>
 							</form>
@@ -274,8 +284,7 @@ User user = (User) session.getAttribute("memberInfo");
 					</div>
 					</c:forEach>
 					<div class="py-6 px-6 text-center">
-						<p>&copy; Design and Developed by DAEJEON CLASS-4 SOUN,
-							SEOUNGHO, MINA</p>
+						<p>&copy; Design and Developed by HANJIN, SEUNGHO</p>
 					</div>
 				</div>
 			</div>
@@ -301,9 +310,3 @@ User user = (User) session.getAttribute("memberInfo");
 </body>
 
 </html>
-
-
-
-
-
-
