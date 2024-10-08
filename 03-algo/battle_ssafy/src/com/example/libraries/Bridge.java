@@ -4,7 +4,7 @@ import java.net.*;
 import java.io.*;
 
 public class Bridge {
-    private static final String HOST = "127.0.0.1";
+    private static final String HOST = "192.168.210.40";
     private static final int PORT = 8747;
 
     private Socket socket = null;

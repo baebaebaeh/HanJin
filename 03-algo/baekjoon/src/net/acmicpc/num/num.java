@@ -13,6 +13,7 @@ public class num {
 		System.setIn(new FileInputStream("data/input.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		int N = Integer.parseInt(br.readLine());
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		int L = Integer.parseInt(st.nextToken());
 		
