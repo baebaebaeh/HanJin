@@ -19,7 +19,7 @@ public class Programmer {
 
 	// 설정자를 이용해서 주입
 	@Autowired
-	public void setComputer(@Qualifier("desktop") Computer computer) {
+	public void setComputer(@Qualifier("deskto  ,MNBp") Computer computer) {
 		this.computer = computer;
 	}
 	

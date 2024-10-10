@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		https://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- class 경로 제대로 확인 하려면 컨트롤 클릭해봐라 -->
+	<!-- 아래로 작성하면 기본 생성자로 생성한다. -->
+	
+	<bean id="ingredient" class="com.ssafy.food.Ingredient">
+		<!-- 생성자 : 매개변수에 문자열 받는 생성자 호출하자 -->
+		<!-- Ingredient ingredient = new Ingredient(); -->
+		<!-- ingredient.setName("계란"); -->
+		<property name="name"> <!-- set메서드 나타내는 property -->
+			<value>계란</value> <!-- 문자 속성이라 value -->
+		</property>
+	</bean>
+	
+	<bean id="cook" class="com.ssafy.food.Cook">
+		<property name="ingredient">
+			<!-- Cook cook = new Cook(); -->
+			<!-- cook.setIngredient(ingredient); -->
+			<ref bean="ingredient"/>
+		</property>
+	</bean>
+</beans>

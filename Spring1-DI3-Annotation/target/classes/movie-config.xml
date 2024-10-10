@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		https://www.springframework.org/schema/context/spring-context.xsd
+	">
+	<!-- Director 클래스를 빈으로 등록한다. id는 클래스 이름의 첫글자르 소문자로 -->
+	<context:component-scan base-package="com.ssafy.movie" />
+	<!-- com.ssafy.movie로 시작하는 모든 패키지(com.ssafy.movie.asdf포함)를 찾아라 -->
+	<!-- <context:annotation-config /> -->
+	<!-- component scan에 annotation 도 포함되어있어서 주석으로 막을 수 있다. -->
+</beans>

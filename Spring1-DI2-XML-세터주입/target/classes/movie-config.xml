@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		https://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- Director 클래스를 빈으로 등록한다. id는 클래스 이름의 첫글자르 소문자로 -->
+	<bean id="director" class="com.ssafy.movie.Director">
+		
+		<!-- 이걸 추천 -->
+		<property name="name" value="크리스토퍼 놀란"/>
+		
+		<!-- 
+		<constructor-arg>
+			<value>크리스토퍼 놀란</value>
+		</constructor-arg>
+		 -->
+	</bean>
+	<!-- 
+	Movie 객체 빈으로 설정한다.
+	id : movie
+	class : Movie
+	 -->
+	<bean id="movie" class="com.ssafy.movie.Movie">
+		<property name="director" ref="director" />
+	</bean>
+</beans>
