@@ -104,5 +104,15 @@ insert into tb_review(
 	?,
 	?
 );
+-- 사용자 생성
+CREATE USER 'ssafy'@'localhost' IDENTIFIED BY 'ssafy';
+
+-- 권한 부여
+GRANT ALL PRIVILEGES ON *.* TO 'ssafy'@'localhost';
+
+-- 권한 적용
+FLUSH PRIVILEGES;
+
+
 		sql = "SET @videoreviewcnt = (SELECT video_reviewcnt FROM tb_video WHERE video_id = ?);\r\n"
 				+ "UPDATE tb_video SET video_reviewcnt = @videoreviewcnt + 1 WHERE video_id = ?;";

@@ -1,39 +1,40 @@
+create schema gt;
 drop table tb_review;
 drop table tb_video;
 drop table tb_user;
 
 
 SET AUTOCOMMIT = 1;
-
+ALTER USER 'ssafy'@'localhost' IDENTIFIED BY 'ssafy';
 
 create table tb_video(
-    video_id varchar(300) primary key,
-    video_title VARCHAR(300) not null,
-    video_part VARCHAR(300) not null,
-    video_viewcnt int not null DEFAULT 0,
-    video_length VARCHAR(300) not null,
-    video_reviewcnt int not null DEFAULT 0,
+    id varchar(300) primary key,
+    title VARCHAR(300) not null,
+    part VARCHAR(300) not null,
+    viewCnt int not null DEFAULT 0,
+    duration VARCHAR(300) not null,
+    reviewcnt int not null DEFAULT 0,
     channel_name VARCHAR(300) not null
 );
 
 
 create table tb_user(
-    user_email varchar(300) primary key,
-    user_password VARCHAR(300) not null,
-    user_name VARCHAR(300) not null,
+    email varchar(300) primary key,
+    password VARCHAR(300) not null,
+    name VARCHAR(300) not null,
     is_user int not null default 1
 );
 
 create table tb_review (
-    review_no int PRIMARY KEY AUTO_INCREMENT,
-    review_id VARCHAR(300) NOT NULL,
-    review_title VARCHAR(300) NOT NULL,
-    review_content VARCHAR(300) NOT NULL,
-    review_user_name VARCHAR(300) NOT NULL,
-    review_score VARCHAR(300) NOT NULL,
-    review_time timestamp DEFAULT CURRENT_TIMESTAMP,
-    review_email VARCHAR(300) NOT NULL,
-    Foreign KEY (review_id) REFERENCES tb_video(video_id) on delete cascade,
+    no int PRIMARY KEY AUTO_INCREMENT,
+    id VARCHAR(300) NOT NULL,
+    title VARCHAR(300) NOT NULL,
+    content VARCHAR(300) NOT NULL,
+    user_name VARCHAR(300) NOT NULL,
+    score VARCHAR(300) NOT NULL,
+    time timestamp DEFAULT CURRENT_TIMESTAMP,
+    email VARCHAR(300) NOT NULL,
+    Foreign KEY (id) REFERENCES tb_video(video_id) on delete cascade,
     Foreign KEY (review_email) REFERENCES tb_user(user_email) on update cascade
 );
 
