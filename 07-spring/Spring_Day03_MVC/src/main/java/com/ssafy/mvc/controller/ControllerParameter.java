@@ -23,8 +23,12 @@ public class ControllerParameter {
 	//사실 반환타입을 MaV 로 바꾸면 됨... 하지만 싫어
 	@GetMapping("/test2-1")
 	public String test2_1(Model model) {
+
 		//모델이라고 하는 바구니를 준비해줬다.
 		model.addAttribute("msg", "model data");
+		if (model.getAttribute("msg") != null) {
+			System.out.println(model.getAttribute("msg"));
+		}
 		return "test2"; //   /WEB-INF/view/test2.jsp
 	}
 	
