@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" id="WebApp_ID" version="6.0">
+  
+  
+  <display-name>Spring_Day03_MVC</display-name>
+
+
+  
+  
+
+  <!-- 먼저 메모리에 올라간다 -->
+  <listener>
+  	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <servlet>
+  	<!-- dispatcherServlet이 환경설정들을 읽어서 스프링 메모리에 올린다. 컨테이너에 올린다. -->
+  	<servlet-name>springDispatcherServlet</servlet-name>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  	<init-param>
+	  	<param-name>contextConfigLocation</param-name>
+	  	<param-value>/WEB-INF/servlet-context.xml</param-value>
+  	</init-param>
+  	<!-- servlet은 최초 호출에 올라간다. 아래 load on startup이 있으면 요청이 없더라도 미리 메모리에 올리라고 한것이다. -->
+  	<load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  
+  
+  <servlet-mapping>
+  <!-- 모든요청은 서블릿으로 와야해 -->
+  	<servlet-name>springDispatcherServlet</servlet-name>
+  	<url-pattern>/</url-pattern>
+  </servlet-mapping>
+  
+
+  <context-param>
+  	<param-name>contextConfigLocation</param-name>
+  	<param-value>/WEB-INF/root-context.xml</param-value>
+  </context-param>
+  
+</web-app>
