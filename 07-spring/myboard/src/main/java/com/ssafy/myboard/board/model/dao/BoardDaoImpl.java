@@ -68,18 +68,29 @@ public class BoardDaoImpl implements BoardDao{
 	}
 	@Override
 	public Board searchByNo(int no) throws SQLException {
+		System.out.println(no);
 		try (
 				Connection con = db.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(
 						"""
 						select no, title, writer, content, view_cnt, reg_date
 						  from board
-						  where no = ?
+						  where no = ?;
 						"""
 						)){
 			pstmt.setInt(1, no);
+			ResultSet rs = pstmt.executeQuery();
+			Board board = new Board();
+			rs.next();
+			board.setNo(rs.getInt("no"));
+			board.setTitle(rs.getString("title"));
+			board.setWriter(rs.getString("writer"));
+			board.setContent(rs.getString("content"));
+			board.setViewCnt(rs.getInt("view_cnt"));
+			board.setRegDate(rs.getString("reg_date"));
+			return board;
+			
 		}
-		return null;
 	}
 
 }

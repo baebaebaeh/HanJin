@@ -29,8 +29,8 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public Board getBoardByNo(int no) throws Exception {
-		boardDao.searchByNo(no);
-		return null;
+		Board board = boardDao.searchByNo(no);
+		return board;
 	}
 
 }

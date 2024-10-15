@@ -43,10 +43,10 @@ public class BoardController {
 	}
 	
 	@GetMapping("/detail")
-	public String detail(Board board) throws Exception {
-		int no = board.getNo();
-		boardService.getBoardByNo(no);
-		return new String();
+	public String detail(@RequestParam int no, Model model) throws Exception {
+		Board board = boardService.getBoardByNo(no);
+		model.addAttribute(board);
+		return "/board/detail";
 	}
 	
 	

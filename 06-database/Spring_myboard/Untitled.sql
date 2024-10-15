@@ -1,0 +1,11 @@
+CREATE DATABASE IF NOT EXISTS examdb;
+USE examdb;
+CREATE TABLE board (
+	no INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(100),
+    writer VARCHAR(100),
+    content VARCHAR(100),
+    view_cnt int,
+    reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+SELECT * FROM board;

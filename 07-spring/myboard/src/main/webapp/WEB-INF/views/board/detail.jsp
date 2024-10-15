@@ -11,19 +11,23 @@
 	<h2>게시판정보</h2>
 	<table>
 		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>글쓴이</th>
-			<th>조회수</th>
-			<th>등록일</th>
+			<th>번호</th><td>${board.no}</td>
 		</tr>
 		<tr>
-			<td>${board.no}</td>
-			<td><a href="/board/detail?no=${board.no}">${board.title}</a></td>
-			<td>${board.writer}</td>
-			<td>${board.viewCnt}</td>
-			<td>${board.regDate}</td>
-		</tr>			
+			<th>제목</th><td>${board.title}</td>
+		</tr>
+		<tr>
+			<th>글쓴이</th><td>${board.writer}</td>
+		</tr>
+		<tr>
+			<th>내용</th><td>${board.writer}</td>
+		</tr>
+		<tr>
+			<th>조회수</th><td>${board.viewCnt}</td>
+		</tr>
+		<tr>
+			<th>등록일</th><td>${board.regDate}</td>
+		</tr>		
 	</table>
 	<a href="${pageContext.request.contextPath}/board/write">게시글등록</a>
 </body>
