@@ -17,7 +17,6 @@ public class O3PageMove {
 //		mav.addObject("msg", "하이 스프링부트"); // 이렇게 하면 공유영역에 올린다.
 //		mav.setViewName("pagemove/index");
 //		return mav;
-		
 		return new ModelAndView("pagemove/index"); // 이렇게 생성하면서 리턴 할 수 있다.
 	}
 	
