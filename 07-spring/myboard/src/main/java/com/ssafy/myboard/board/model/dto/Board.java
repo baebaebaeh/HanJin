@@ -7,11 +7,13 @@ public class Board {
 	private String content;
 	private int viewCnt;
 	private String regDate;
+	private BoardFile boardFile;
 	public Board() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Board(int no, String title, String writer, String content, int viewCnt, String regDate) {
+	public Board(int no, String title, String writer, String content, int viewCnt, String regDate,
+			BoardFile boardFile) {
 		super();
 		this.no = no;
 		this.title = title;
@@ -19,6 +21,7 @@ public class Board {
 		this.content = content;
 		this.viewCnt = viewCnt;
 		this.regDate = regDate;
+		this.boardFile = boardFile;
 	}
 	public int getNo() {
 		return no;
@@ -56,10 +59,16 @@ public class Board {
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
+	public BoardFile getBoardFile() {
+		return boardFile;
+	}
+	public void setBoardFile(BoardFile boardFile) {
+		this.boardFile = boardFile;
+	}
 	@Override
 	public String toString() {
 		return "Board [no=" + no + ", title=" + title + ", writer=" + writer + ", content=" + content + ", viewCnt="
-				+ viewCnt + ", regDate=" + regDate + "]";
+				+ viewCnt + ", regDate=" + regDate + ", boardFile=" + boardFile + "]";
 	}
 	
 	

@@ -32,6 +32,7 @@ public class O2Parameter {
 	public String test2(@RequestParam String id, 
 						@RequestParam(value = "pass") String password,
 						@RequestParam(required = false) String name,  // 필수는 아니야~ 그리고 기본값으로 null값을 넣어줄께
+//						@RequestParam(required = false, value = "pas") String n,
 						@RequestParam(defaultValue = "ssafy@ssafy.com") String email){
 		
 		System.out.println(id + "," + password + "," + name + "," + email);
