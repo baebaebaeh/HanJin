@@ -41,7 +41,6 @@ public class FileController {
 			Resource resource = resourceLoader.getResource("classpath:/static/imgs");
 			System.out.println(resource);
 			file.transferTo(new File(resource.getFile(), fileName));
-
 			model.addAttribute("fileName", fileName);
 		}
 

@@ -7,126 +7,69 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
 
 import com.ssafy.myboard.board.model.dto.Board;
 import com.ssafy.myboard.board.model.dto.BoardFile;
+import com.ssafy.myboard.config.MyBatisConfig;
 import com.ssafy.myboard.util.DBUtil;
 
 import jakarta.servlet.jsp.jstl.sql.Result;
 
 @Repository
 public class BoardDaoImpl implements BoardDao {
-
-	private DBUtil db;
+	
+	private final String NS = "com.ssafy.myboard.board.model.dao.BoardDao.";
+	
+	private SqlSessionFactory sqlFactory;
 
 	public BoardDaoImpl() {
-		db = DBUtil.getInstance();
+		sqlFactory = MyBatisConfig.getFactory();
 	}
 
 	@Override
-	public List<Board> selectBoard() throws SQLException {
-		try (Connection con = db.getConnection(); PreparedStatement pstmt = con.prepareStatement("""
-				select no, title, writer, view_cnt, reg_date
-				  from board
-				 order by no desc
-				""");) {
-			List<Board> list = new ArrayList<>();
-			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()) {
-				Board board = new Board();
-				board.setNo(rs.getInt("no"));
-				board.setTitle(rs.getString("title"));
-				board.setWriter(rs.getString("writer"));
-				board.setViewCnt(rs.getInt("view_cnt"));
-				board.setRegDate(rs.getString("reg_date"));
-				list.add(board);
-			}
+	public List<Board> selectBoard() { // 마이바티스가 runtimeexception으로 바꿔줘서 sqlexception을 안 던져도 된다.
+		try (SqlSession sqlSession = sqlFactory.openSession()) {
+			List<Board> list = sqlSession.selectList(NS + "selectBoard");
+			sqlSession.commit();
 			return list;
+			
 		}
 	}
 
 	@Override
-	public boolean addBoard(Board board) throws SQLException {
-
-		try (Connection con = db.getConnection(); PreparedStatement pstmt = con.prepareStatement("""
-				insert into board (title, writer, content, view_cnt)
-				value (?, ?, ?, ?);
-				""")) {
-			pstmt.setString(1, board.getTitle());
-			pstmt.setString(2, board.getWriter());
-			pstmt.setString(3, board.getContent());
-			pstmt.setInt(4, 0);
-			pstmt.executeUpdate();
-			try (PreparedStatement pstmt2 = con.prepareStatement("""
-					select last_insert_id() from dual
-					""");) {
-				ResultSet rs = pstmt2.executeQuery();
-				if (rs.next()) {
-					board.setNo(rs.getInt("last_insert_id()"));
-				}
-			}
+	public boolean addBoard(Board board) {
+		try (SqlSession sqlSession = sqlFactory.openSession()) {
+			sqlSession.insert(NS + "addBoard", board);
+			sqlSession.commit();
 		}
-		return false;
+		return true;
 	}
 
 	@Override
-	public Board searchByNo(int no) throws SQLException {
-		System.out.println(no);
-		try (Connection con = db.getConnection(); PreparedStatement pstmt = con.prepareStatement("""
-				select no, title, writer, content, view_cnt, reg_date
-				  from board
-				  where no = ?
-				""")) {
-			pstmt.setInt(1, no);
-			ResultSet rs = pstmt.executeQuery();
-			Board board = new Board();
-			rs.next();
-			board.setNo(rs.getInt("no"));
-			board.setTitle(rs.getString("title"));
-			board.setWriter(rs.getString("writer"));
-			board.setContent(rs.getString("content"));
-			board.setViewCnt(rs.getInt("view_cnt"));
-			board.setRegDate(rs.getString("reg_date"));
-			return board;
+	public Board searchByNo(int no) {
+		try (SqlSession sqlSession = sqlFactory.openSession()) {
+			sqlSession.commit();
+			return sqlSession.selectOne(NS + "searchByNo", no);
 		}
 	}
 
 	@Override
-	public void insertBoardFile(BoardFile boardFile) throws SQLException {
-
-		try (Connection con = db.getConnection(); PreparedStatement pstmt = con.prepareStatement("""
-				insert into board_file (file_path, ori_name, system_name, no)
-				value (?, ?, ?, ?)
-				""")) {
-			System.out.println(boardFile.getFilePath());
-			pstmt.setString(1, boardFile.getFilePath());
-			pstmt.setString(2, boardFile.getOriName());
-			pstmt.setString(3, boardFile.getSystemName());
-			pstmt.setInt(4, boardFile.getNo());
-			pstmt.executeUpdate();
+	public void insertBoardFile(BoardFile boardFile) {
+		
+		try (SqlSession sqlSession = sqlFactory.openSession()) {
+			sqlSession.insert(NS + "insertBoardFile", boardFile);
+			sqlSession.commit();
 		}
 	}
 
 	@Override
-	public BoardFile selectBoardFileByNo(int no) throws SQLException {
-		try (Connection con = db.getConnection(); PreparedStatement pstmt = con.prepareStatement("""
-				select file_no, file_path, ori_name, system_name, no
-				  from board_file
-				  where no = ?
-				""")) {
-			pstmt.setInt(1, no);
-			ResultSet rs = pstmt.executeQuery();
-			BoardFile board = new BoardFile();
-			rs.next();
-			board.setFileNo(rs.getInt("file_no"));
-			board.setNo(rs.getInt("no"));
-			board.setFilePath(rs.getString("file_path"));
-			board.setOriName(rs.getString("ori_name"));
-			board.setSystemName(rs.getString("system_name"));
-			return board;
+	public BoardFile selectBoardFileByNo(int no) {
+		try (SqlSession sqlSession = sqlFactory.openSession()) {
+			sqlSession.commit();
+			return sqlSession.selectOne(NS + "selectBoardFileByNo", no);
 		}
 	}
-
-
 }

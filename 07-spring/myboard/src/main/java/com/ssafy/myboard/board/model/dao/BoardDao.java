@@ -7,14 +7,14 @@ import com.ssafy.myboard.board.model.dto.Board;
 import com.ssafy.myboard.board.model.dto.BoardFile;
 
 public interface BoardDao {
-	List<Board> selectBoard() throws SQLException;
+	List<Board> selectBoard();
 
-	boolean addBoard(Board board) throws SQLException;
+	boolean addBoard(Board board);
 
-	Board searchByNo(int no) throws SQLException;
+	Board searchByNo(int no);
 	
-	void insertBoardFile(BoardFile boardFile) throws SQLException;
+	void insertBoardFile(BoardFile boardFile);
 
-	BoardFile selectBoardFileByNo(int no) throws SQLException;
+	BoardFile selectBoardFileByNo(int no);
 
 }
