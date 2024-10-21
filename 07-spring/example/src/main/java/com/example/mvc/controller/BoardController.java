@@ -1,16 +1,16 @@
 package com.example.mvc.controller;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.mvc.model.dto.Board;
 import com.example.mvc.model.service.BoardService;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import ch.qos.logback.core.model.Model;
 
 @Controller
 @RequestMapping("/board")
@@ -23,9 +23,20 @@ public class BoardController {
 	}
 	
 	@GetMapping("/list")
-	public String BoardList(Model model) {
+	public String boardList(Model model) {
 		List<Board> board = boardService.getAllBoards();
-		
-		return "/boardList";
+		System.out.println(board.size());
+		for (Board b : board) {
+			System.out.println(b);
+		}
+		model.addAttribute("boards", board);
+		return "/board/boardList";
 	}
+	
+	@GetMapping("/writeForm")
+	public String boardWrite() {
+		return "/writeForm";
+	}
+	
+	
 }

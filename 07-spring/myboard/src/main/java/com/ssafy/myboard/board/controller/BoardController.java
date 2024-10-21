@@ -33,6 +33,7 @@ public class BoardController {
 	public String list(Model model) throws Exception { // 이렇게 하든 반환타입을 MaV로 하든 둘중하나고르자 왜? 데이터를 보내야 하니까
 		model.addAttribute("list", boardService.list());
 		return "/board/list";
+		model.addAttribute(model)
 	}
 
 	@GetMapping("/write")
