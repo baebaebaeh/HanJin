@@ -19,7 +19,6 @@ public class WebConfig implements WebMvcConfigurer{
 	private BInterceptor bInterceptor;
 	@Autowired
 	private CInterceptor cInterceptor;
-	
 	@Autowired
 	private LoginInterceptor loginInterceptor;
 	
@@ -31,8 +30,5 @@ public class WebConfig implements WebMvcConfigurer{
 //		registry.addInterceptor(bInterceptor).addPathPatterns("/hello");
 //		registry.addInterceptor(cInterceptor).addPathPatterns("/hello");
 		registry.addInterceptor(loginInterceptor).addPathPatterns("/regist").excludePathPatterns();
-		
-		
-		
 	}
 }
