@@ -21,3 +21,11 @@ select * from board;
 
 desc board_file;
 desc board;
+
+
+insert into board(title, writer, content)
+select title, writer, content
+from board;
+
+select count(*)
+from board;

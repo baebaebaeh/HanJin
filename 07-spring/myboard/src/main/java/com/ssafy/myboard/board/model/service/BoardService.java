@@ -1,13 +1,14 @@
 package com.ssafy.myboard.board.model.service;
 
-import java.util.List;
+import java.util.Map;
 
-import com.ssafy.myboard.board.model.dto.Board;
+import com.ssafy.myboard.board.model.Board;
+import com.ssafy.myboard.board.model.BoardSearch;
 
 public interface BoardService {
-	List<Board> list() throws Exception;
+	Map<String, Object> list(BoardSearch boardSearch);
 
-	boolean addBoard(Board board) throws Exception;
+	void writeBoard(Board board) throws Exception;
 
-	Board getBoardByNo(int no) throws Exception;
+	Board detailBoard(int no) throws Exception;
 }

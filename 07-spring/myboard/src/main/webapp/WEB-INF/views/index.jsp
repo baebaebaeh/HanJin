@@ -11,3 +11,6 @@
 	<a href="${pageContext.request.contextPath}/board/list">게시판 이동</a>
 </body>
 </html>
+
+
+

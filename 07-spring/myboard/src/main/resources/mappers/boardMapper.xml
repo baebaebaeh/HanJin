@@ -2,82 +2,51 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <!-- 아이디랑 결합했을때 고유하게 만들어주려고 쓴다. -->
+
 <mapper namespace="com.ssafy.myboard.board.model.dao.BoardDao">
-	
-  <!-- 이 아이디 이름을 사용한 메서드 이름이 여러개일 수 있으니 위의 namespace에 package경로를 준다. -->
-  	<!-- view_cnt에 as viewCnt 쓰거나 resultMap 으로 매핑하자 난 resultMap을 사용해볼래 -->
-  	<!-- ############################여기 Board 왜 package 주소 안썼는지 질문 ############################## -->
-<!--   	<resultMap type="Board" id="boardMap">
-  		no title writer는 안써도 되는데 그냥 가독성때문에 써주자
-  		<result column="no" property="no"/>
-  		<result column="title" property="title"/>
-  		<result column="writer" property="writer"/>
-  		<result column="content" property="content"/>
-  		<result column="view_cnt" property="viewCnt"/>
-  		<result column="reg_date" property="regDate"/>
-  	</resultMap> -->
-  	
-<!-- 	<resultMap type="BoardFile" id="boardFileMap">
-  		<result column="file_no" property="fileNo"/>
-  		<result column="file_path" property="filePath"/>
-  		<result column="ori_name" property="oriName"/>
-  		<result column="system_name" property="systemName"/>
-  		<result column="no" property="no"/>
-  	</resultMap> -->
-	<!-- <select id="selectBoard" resultType="Board"> 얘 대신에 -->
-	<select id="selectBoard" resultType="Board">
-		select no, title, writer, view_cnt, reg_date
-		from board
-		order by no desc
+	<!-- 게시물 목록 데이터 -->
+	<select id="selectBoard" resultType="Board" parameterType="boardSearch">
+		select *
+		  from board
+		 order by no desc
+		 limit #{offset}, #{listSize}
 	</select>
 	
+	<!-- 게시물 카운트(전체) -->
+	<select id="selectBoardCount" resultType="int" parameterType="boardSearch">
+		select count(*)
+		  from board	
+	</select>
+
+
 	
-	<!-- addBoard(Board board) -->
-	<insert id="addBoard" parameterType="Board" useGeneratedKeys="true" keyProperty="no">
-		<!-- board.setNo(rs.getInt("last_insert_id()")); -->
-		<!-- 보통 데이터베이스에서 사용 -->
-		
-	<!-- 
-	<insert id="addBoard" parameterType="Board">
-		<selectKey keyProperty="no" resultType="int" order="AFTER">
-			select last_insert_id() from dual
-		</selectKey>
+	<insert id="insertBoard" parameterType="Board" useGeneratedKeys="true" keyProperty="no">
+		<!-- 
+    	<selectKey keyProperty="no" resultType="int" order="AFTER">
+    		select last_insert_id() from dual
+    	</selectKey>
 		 -->
-		insert into board (title, writer, content)
-		value (#{title}, #{writer}, #{content});
-	</insert>
-	
-	
-	
-	<select id="searchByNo" parameterType="int" resultType="Board">
-		select no, title, writer, content, view_cnt, reg_date
-		from board
-		where no = #{no}
-	</select>
-	
-	
-	
-	<insert id="insertBoardFile" parameterType="BoardFile" >
-		insert into board_file (file_path, ori_name, system_name, no)
-		value (#{filePath}, #{oriName}, #{systemName}, #{no})
+    	insert into board (title, writer, content)
+	    values (#{title}, #{writer}, #{content})
 	</insert>	
-		
 	
+	<insert id="insertBoardFile" parameterType="BoardFile">
+        insert into board_file (file_path, ori_name, system_name, no)
+        values (#{filePath}, #{oriName}, #{systemName}, #{no})
+	</insert>	            
 	
-	<select id="selectBoardFileByNo" parameterType="int" resultType="BoardFile">
-		select file_no, file_path, ori_name, system_name, no
-		from board_file
-		where no = #{no}
+	<select id="selectBoardByNo" parameterType="int" resultType="Board">
+        select *
+	      from board
+	     where no = #{no}	
+	</select>            
+	
+	<select id="selectBoardFileByNo" parameterType="int" resultType="boardFile">
+		select file_no, no, file_path, ori_name, system_name
+		  from board_file
+		 where no = #{no}	
 	</select>	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 </mapper>
+
+
+
