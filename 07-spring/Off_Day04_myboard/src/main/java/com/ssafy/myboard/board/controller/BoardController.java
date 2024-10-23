@@ -70,7 +70,7 @@ public class BoardController {
 			String subDir = new SimpleDateFormat("/yyyy/MM/dd/HH").format(new Date());
 			File dir = new File("c:/SSAFY/uploads" + subDir);
 			dir.mkdirs();
-
+			
 			String systemName = UUID.randomUUID().toString() + oriName;
 			attach.transferTo(new File(dir, systemName));
 

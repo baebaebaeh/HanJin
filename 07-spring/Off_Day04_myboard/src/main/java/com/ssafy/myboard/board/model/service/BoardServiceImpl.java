@@ -1,4 +1,4 @@
-package com.ssafy.myboard.board.model.service;
+ package com.ssafy.myboard.board.model.service;
 
 import java.util.HashMap;
 import java.util.List;

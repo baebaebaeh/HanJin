@@ -10,9 +10,7 @@ public class PageResult {
 	private int endPage;		
 	private int lastPage;		
 	private boolean prev;		
-	private boolean next;		
-	
-	
+	private boolean next;
 	
 	private static final int LIST_SIZE = 10;
 	private static final int TAB_SIZE = 10;
