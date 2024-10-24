@@ -6,12 +6,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript"
-	src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=[clientid]"></script>
+	src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=[CLIENT_ID]"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 	<h2>메인페이지</h2>
-	<a href="${pageContext.request.contextPath}/board/list">게시판 이동</a>
+	<a href="${pageContext.request.contextPath}/gps">gps 이동</a>
 	<div id="map" style="width: 100%; height: 1600px;"></div>
 	<script>
 		var position = new naver.maps.LatLng(37.3595704, 127.105399);
