@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <form action="search" method="GET" class="row lh-base">
-	<input type="hidden" name="offset" value="${pr.offset}">
-	<input type="hidden" name="tabSize" value="${pr.tabSize}">
 	<div class="col-2">
 		<label class="form-label">검색기준</label> 
 		<select class="form-select" name="key">

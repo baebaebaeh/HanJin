@@ -20,10 +20,8 @@
 
 	<!-- 전체 게시글 조회 -->
 <!-- 	<select id="selectAll" resultType="com.ssafy.board.model.dto.Board"> -->
-	<select id="selectAll" resultType="Board" parameterType="BoardSearch">
-		SELECT id, content, writer, title, reg_date AS regDate, view_cnt AS viewCnt
-		FROM board
-		LIMIT #{offset}, #{listSize}; 
+	<select id="selectAll" resultType="Board">
+		SELECT id, content, writer, title, reg_date AS regDate, view_cnt AS viewCnt FROM board;
 	</select>
 	
 	<!-- 상세 게시글 조회 -->
@@ -64,7 +62,7 @@
 	</update>
 	
 	<!-- 검색기능 -->
-	<select id="search" resultType="Board" parameterType="Map">
+	<select id="search" resultType="Board" parameterType="SearchCondition">
 		SELECT * FROM board
 		<!-- 검색 조건 -->
 		<if test="key != 'none'">
@@ -76,17 +74,7 @@
 		</if>
 	</select>
 	
-	<select id="countSearch" resultType="int" parameterType="SearchCondition">
-		SELECT (*) FROM board
-		<!-- 검색 조건 -->
-		<if test="key != 'none'">
-			WHERE ${key} LIKE concat('%',#{word},'%')
-		</if>
-	</select>
 	
-	<select id="countBoards" resultType="int">
-		SELECT count(*) FROM board
-	</select>
 	
 	
 	

@@ -35,11 +35,7 @@
 		<div class="d-flex justify-content-end">
 			<a class="btn btn-outline-primary" href="/writeform">글등록</a>
 		</div>
-		<ul class="pagination">
-			<c:forEach begin="1" end="${pr.endPage - pr.beginPage}">
-			    <li><a href="/list?nowPage=${pr.beginPage}">${pr.beginPage}</a></li>
-			</c:forEach>
-		</ul>
+
 	</div>
 </body>
 </html>

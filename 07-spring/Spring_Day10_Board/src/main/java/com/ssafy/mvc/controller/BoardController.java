@@ -1,8 +1,9 @@
 package com.ssafy.mvc.controller;
 
 import java.util.List;
-import java.util.Map;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ssafy.mvc.model.dto.Board;
-import com.ssafy.mvc.model.dto.BoardSearch;
 import com.ssafy.mvc.model.dto.SearchCondition;
 import com.ssafy.mvc.model.service.BoardService;
-import com.ssafy.util.PageResult;
 
 @Controller
 public class BoardController {
@@ -28,22 +27,10 @@ public class BoardController {
 	
 	
 	@GetMapping("/list")
-	public String list(Model model, BoardSearch boardSearch) {
+	public String list(Model model) {
 		//서비스를 통해서.... 게시글들을 가져와야한다.
-		int numberOfBoard = boardService.countBoards();
-//		PageResult pr;
-//		if (nowPage == -1) {
-//			pr = new PageResult(numberOfBoard);
-//		} else if (listSize == -1) {
-//			pr = new PageResult(nowPage, numberOfBoard);
-//		} else if (tabSize == -1) {
-//			pr = new PageResult(nowPage, numberOfBoard, listSize);
-//		} else {
-//			pr = new PageResult(nowPage, numberOfBoard, listSize, tabSize);
-//		}
-		Map<String, Object> map = boardService.getBoardList(boardSearch);
-		model.addAttribute("boards", map.get("boards"));
-		model.addAttribute("pr", map.get("pr"));
+		List<Board> boards = boardService.getBoardList();
+		model.addAttribute("boards", boards);
 		return "/board/list";
 	}
 	
@@ -89,9 +76,7 @@ public class BoardController {
 	@GetMapping("/search")
 //	public String search(@RequestParam("key") String key, @RequestParam("word")String word ....)
 	public String search(@ModelAttribute SearchCondition condition, Model model) {
-		Map<String, Object> map = boardService.search(condition);
-		
-		model.addAttribute("boards", map.get("boards"));
+		model.addAttribute("boards", boardService.search(condition));
 		
 		return "/board/list";
 	}

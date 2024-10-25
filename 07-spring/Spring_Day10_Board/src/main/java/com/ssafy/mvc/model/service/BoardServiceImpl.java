@@ -1,8 +1,6 @@
 package com.ssafy.mvc.model.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,9 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.mvc.model.dao.BoardDao;
 import com.ssafy.mvc.model.dto.Board;
-import com.ssafy.mvc.model.dto.BoardSearch;
 import com.ssafy.mvc.model.dto.SearchCondition;
-import com.ssafy.util.PageResult;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -25,18 +21,9 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	@Override
-	public Map<String, Object> getBoardList(BoardSearch boardSearch) {
+	public List<Board> getBoardList() {
 		System.out.println("모든 게시글 가지고 왔습니다.");
-		Map<String, Object> map = new HashMap<>();
-		List<Board> list = boardDao.selectAll(boardSearch);
-		System.out.println(list.get(0));
-		map.put("boards", list);
-		PageResult pr = new PageResult(boardSearch.getNowPage(),
-				boardDao.countBoards(),
-				boardSearch.getListSize(),
-				boardSearch.getTabSize());
-		map.put("pr", pr);
-		return map;
+		return boardDao.selectAll();
 	}
 
 	@Override
@@ -69,19 +56,8 @@ public class BoardServiceImpl implements BoardService {
 
 
 	@Override
-	public Map<String, Object> search(SearchCondition condition) {
-		Map<String, Object> map = new HashMap<>();
-		List<Board> list = boardDao.search(condition);
-		map.put("list", list);
-		int count
-		return map;
-	}
-
-
-	@Override
-	public int countBoards() {
-		return boardDao.countBoards();
-		
+	public List<Board> search(SearchCondition condition) {
+		return boardDao.search(condition);
 	}
 
 }
