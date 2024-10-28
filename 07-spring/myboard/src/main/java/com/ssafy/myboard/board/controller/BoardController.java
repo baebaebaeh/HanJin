@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,8 @@ import com.ssafy.myboard.board.model.Board;
 import com.ssafy.myboard.board.model.BoardFile;
 import com.ssafy.myboard.board.model.BoardSearch;
 import com.ssafy.myboard.board.model.service.BoardService;
+
+import jakarta.annotation.Resource;
 
 //@CrossOrigin("*")
 @Controller
@@ -56,7 +59,6 @@ public class BoardController {
 			dir.mkdirs();
 			String systemName = UUID.randomUUID().toString() + oriName;
 			attach.transferTo(new File(dir, systemName));  // 메모리의 파일 정보를 특정 위치에 저장
-			
 			// 데이터베이스에 저장하기 위한 준비
 			BoardFile boardFile = new BoardFile();
 			boardFile.setFilePath(subDir);
