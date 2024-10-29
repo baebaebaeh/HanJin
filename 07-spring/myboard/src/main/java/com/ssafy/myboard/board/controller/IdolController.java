@@ -25,10 +25,11 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping("/idol")
+@RequestMapping("/api/idol")
 @Tag(name="IdolController(아이돌 관리 컨트롤러)", description = "아이돌 정보를 처리하는 컨트롤러 클래스 입니다")
 public class IdolController {
 	private final IdolService idolService;
+	
 	
 	public IdolController(IdolService idolService) {
 		this.idolService = idolService;
@@ -141,7 +142,9 @@ public class IdolController {
 	}
 
 	@PutMapping("{no}")
-	public void modify(@RequestBody Idol idol) {
+	public void modify(@RequestBody Idol idol, @PathVariable("no") int no) {
+		System.out.println("수정");
+		idol.setNo(no);
 		idolService.modify(idol);
 	}
 

@@ -1,30 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geolocation Example</title>
 </head>
-<style>
-    .a2 {
-        clear: both
-    }
-</style>
-
 <body>
-    <main>
-        <div id="a" class="b"> 1 </div>
-        <div class="b"> 2 </div>
-        <div name="c"> 3 </div>
-        <p name="c"> 4 </p>
-        <p class="d"> 5 </p>
-        <p class="e"> 6 </p>
-    </main>
-    <script>
-        let list = document.querySelectorAll("[name='c']");
-        console.log(list[0].innerText);
-    </script>
-</body>
+  <h1>Get User Location</h1>
+  <button onclick="getLocation()">Get Location</button>
+	<a href="${pageContext.request.contextPath}/">main</a>
+  <script>
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(sendPositionToServer, showError);
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
+    }
 
+    function sendPositionToServer(position) {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+
+
+      fetch('/location', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          latitude: latitude,
+          longitude: longitude
+        })
+      }).then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+      }).then(data => {
+        console.log('Server Response:', data);
+      }).catch(error => {
+        console.error('Error:', error);
+      });
+    }
+
+    function showError(error) {
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          alert("User denied the request for Geolocation.");
+          break;
+        case error.POSITION_UNAVAILABLE:
+          alert("Location information is unavailable.");
+          break;
+        case error.TIMEOUT:
+          alert("The request to get user location timed out.");
+          break;
+        case error.UNKNOWN_ERROR:
+          alert("An unknown error occurred.");
+          break;
+      }
+    }
+  </script>
+</body>
 </html>

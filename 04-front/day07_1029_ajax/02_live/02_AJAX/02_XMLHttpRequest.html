@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const URL = 'https://jsonplaceholder.typicode.com/todos/1'
+
+    //AJAX 통신 시작
+    const myXhr = new XMLHttpRequest()
+
+    //xhr 보내기 위해서 open 메서드를 활용
+    myXhr.open('GET', URL)
+    
+    //요청 보내기
+    myXhr.send() 
+    
+    // 싱글스레드 이기때문에 AJAX 요청을 보내놓고 응답을 기다리지 않음
+    // 바로 넣어버리고 넘어가서 
+    console.log(myXhr)
+    console.log(myXhr.readyState)
+    const todo = myXhr.response 
+    console.log(todo) //  안나옵니다.
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Dog API</h1>
+  <button id="btn">댕댕아 나와죠</button>
+  <img src="" alt="" id="dog-img">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    const URL = "https://dog.ceo/api/breeds/image/random";
+
+    // 댕댕이 보여주기 위한 콜백함수 
+    function getDog() {
+      // 객체를 만들고
+      const xhr = new XMLHttpRequest();
+
+      // onreadystatechange에 콜백함수를 직접 등록
+      xhr.onreadystatechange = function() {
+        if(xhr.readyState == xhr.DONE){
+          if(xhr.status == 200){
+            // console.log(JSON.parse(xhr.response).message)
+            // console.log(JSON.parse(xhr.response)['message'])
+            const imgSrc = JSON.parse(xhr.response)['message']
+
+            const imgTag = document.querySelector("#dog-img")
+            imgTag.src = imgSrc;
+            // imgTag.setAttribute("src", imgSrc)
+          }
+         }
+        }
+
+      xhr.open("GET", URL)
+      xhr.send();
+    }
+      // 이렇게도 가능
+      // function getDog(){
+      //   axios.get(URL)
+      //   .then((response) => {
+      //     const imgSrc = response.data.message;
+      //     document.querySelector("#dog-img").setAttribute("src", imgSrc)
+      //   })
+      // }
+    // 클라이언트에서 요소 선택 
+
+    const btn = document.querySelector("#btn")
+    // 이벤트 생성
+    btn.addEventListener("click", getDog)
+  </script>
+</body>
+</html>
