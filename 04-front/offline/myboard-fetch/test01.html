@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #output div {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="btn-area">
+    <button id="btn-all">전체 조회</button>
+    <button id="btn-one">상세 조회</button>
+    <button id="btn-regist">등록</button>
+    <button id="btn-modify">수정</button>
+    <button id="btn-delete">삭제</button>
+  </div>
+  <div id="output"></div>
+  <script>
+
+
+
+    function requestIdolList() {
+      fetch("http://192.168.210.40:8080/api/idol")
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (idolList) {
+          const outputDiv = document.getElementById("output");
+          outputDiv.innerHTML = ""; // 초기화
+          idolList.forEach(function (idol) {
+            const idolDiv = document.createElement("div");
+            console.log(idol.no, idol.name, idol.gender);
+            idolDiv.innerHTML = `
+              <p>번호 : ${idol.no}</p>
+              <p>이름 : ${idol.name}</p>
+              <p>성별 : ${idol.gender}</p>
+            `
+            outputDiv.appendChild(idolDiv);
+          });
+        })
+        .catch()
+
+    }
+
+
+
+
+
+
+    const btnAll = document.getElementById("btn-all");
+    btnAll.addEventListener("click", function () {
+      requestIdolList();
+    });
+
+
+
+    const btnOne = document.getElementById("btn-one");
+    btnOne.addEventListener("click", function () {
+      fetch("http://192.168.210.40:8080/api/idol/260")
+        .then(function (response) {
+          return response.json(); // 얘도 promise 객체를 준다.
+        })
+        .then(function (idol) {
+          const outputDiv = document.getElementById("output");
+          outputDiv.innerHTML = ""; // 초기화
+          const idolDiv = document.createElement("div");
+          idolDiv.innerHTML = `
+            <p>번호 : ${idol.no}</p>
+            <p>이름 : ${idol.name}</p>
+            <p>성별 : ${idol.gender}</p>
+          `;
+          outputDiv.appendChild(idolDiv);
+        })
+        .catch()
+    });
+
+
+
+
+
+    const btnDelete = document.getElementById("btn-delete");
+    btnDelete.addEventListener("click", function () {
+      fetch("http://192.168.210.40:8080/api/idol/13", { method: "DELETE" })
+        .then(function () {
+          alert("삭제를 성공했습니다");
+          requestIdolList();
+        })
+        .catch();
+    });
+
+
+
+    const btnRegist = document.getElementById("btn-regist");
+    btnRegist.addEventListener("click", function () {
+
+      const URL = "http://192.168.210.40:8080/api/idol";
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", URL, true);
+      xhr.setRequestHeader("Content-Type", "application/json")
+      const idol = {
+        "name": "asdf",
+        "gender": "F"
+      };
+      xhr.send(JSON.stringify(idol));
+
+
+
+
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status < 300) {
+          // 등록성공~~ : 목록을 요청하기
+          requestIdolList();
+          alert("등록되었습니다.");
+        }
+      };
+    });
+
+
+    const btnModify = document.getElementById("btn-modify");
+    btnModify.addEventListener("click", function () {
+      const URL = "http://192.168.210.40:8080/api/idol/33060"
+      const xhr = new XMLHttpRequest();
+      xhr.open("PUT", URL, true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      const idol = {
+        "name": "루루루"
+      }
+      xhr.send(JSON.stringify(idol));
+
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status < 300) {
+          // 등록성공~~ : 목록을 요청하기
+          requestIdolList();
+          alert("수정되었습니다.");
+        }
+      };
+    });
+
+  </script>
+</body>
+
+</html>

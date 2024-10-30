@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 아래 함수가 성공했는지 어떻게 알까?
+    // then으로 안다.
+    myFetch("abcde")
+      .then(function (response) {
+        console.log(response.data, response.msg);
+        console.log("난 성공해서 불렸음")
+      })
+      .catch(function () {
+        console.log("난 실패 했음")
+      })
+    // promise 객체 반환
+    function myFetch(data) {
+      return new Promise(function (success, fail) {
+        if (data.length > 10) { // 실패
+          fail({
+            errorCode: 100
+          });
+        } else {
+          success({
+            // 객체를 보낼 수 있다.
+            data: data,
+            msg: data.length + "의 메시지는 10자 이하입니다."
+          });
+        }
+      });
+    }
+
+
+  </script>
+</body>
+
+</html>
