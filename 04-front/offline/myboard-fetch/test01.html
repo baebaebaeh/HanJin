@@ -30,9 +30,12 @@
 
 
     function requestIdolList() {
-      fetch("http://192.168.210.40:8080/api/idol")
+      fetch("http://localhost:8080/api/idol")
         .then(function (response) {
-          return response.json();
+          console.log(response);
+          let respon = response.json();
+          console.log(respon);
+          return respon; 
         })
         .then(function (idolList) {
           const outputDiv = document.getElementById("output");
@@ -49,13 +52,7 @@
           });
         })
         .catch()
-
     }
-
-
-
-
-
 
     const btnAll = document.getElementById("btn-all");
     btnAll.addEventListener("click", function () {

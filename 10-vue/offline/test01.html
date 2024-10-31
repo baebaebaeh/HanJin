@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+  <!-- Vue의 영향을 받을 곳에 영역전개하자 id는 app으로 하자 습관적으로 -->
+  <div id="app">
+    <!-- 리턴시킨 값을 여기다가 작성하면 됨 -->
+    {{ msg1 }} :: {{ msg2 }}
+  </div>
+  <script>
+    const { ref, createApp } = Vue
+    createApp ({
+      setup() {
+        const msg1 = "hello";
+        const msg2 = ref("msg2 hello");
+
+        setTimeout(() => {
+          console.log("msg 변경");
+          
+          msg1.value = "msg hello"
+          msg2.value = "msg hello"
+        }, 5000);
+
+        return{
+          msg1 : msg,
+          msg2 : msg2,
+        };
+      }
+    })
+    .mount("#app");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // const { ref } = Vue
+    // console.dir(Vue)
+    // //옵션을 객체단위로 주겠다
+    // Vue.createApp({
+    //   // setup은 항상 return과 같이 사용해야한다.
+    //   setup : function() {
+    //     const msg = ref("hello");
+
+
+    //     return {
+    //       msg: msg
+
+    //     }
+    //   }
+    // })
+    // .mount("#app");
+  </script>
+</body>
+</html>

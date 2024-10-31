@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -66,6 +67,7 @@ public class IdolController {
 						@ApiResponse(responseCode = "500", description = "서버 실행시 에러")
 				})
 	@GetMapping
+	@CrossOrigin
 	public ResponseEntity<Object> list() {
 		// list 데이터를 브자우저에서 사용하도록 문자열로 반환해서 전송해줘야 한다.
 		// 객체를 반환하면 객체의 내용을 json으로 변환해준다 : jackson

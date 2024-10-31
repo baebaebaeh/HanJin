@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="app">
+    {{msg}}
+  </div>
+  <!-- 
+    화면이 로딩 시 한글이름이 출력됨
+    3초뒤에 영문이름으로 변경 출력
+  -->
+  <script>
+    const { ref, createApp } = Vue;
+    createApp ({
+      setup() {
+        const msg = ref("배한진");
+        setTimeout(() => {
+          msg.value = "BaeHanjin"
+        }, 3000);
+
+        return {
+          msg,
+        }
+      }
+    })
+    .mount("#app")
+  </script>
+</body>
+</html>
