@@ -8,8 +8,10 @@
 
   <body>
     <div id="app">
+      <input type="text" @input="onInput">
       <p>{{inputText1}}</p>
       <hr />
+      <input type="text" v-model="inputText2">
       <p>{{inputText2}}</p>
     </div>
     <script>
@@ -19,9 +21,13 @@
         setup() {
           const inputText1 = ref("");
           const inputText2 = ref("");
+          const onInput = function(){
+            inputText1.value= event.currentTarget.value;
+          }
           return {
             inputText1,
             inputText2,
+            onInput
           };
         },
       });

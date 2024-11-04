@@ -7,7 +7,13 @@
   </head>
 
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <div :style="{color: activeColor, fontSize: fontSize+'px'}">글자</div>
+      <div :style="{'font-size': fontSize+'px'}">글자</div>
+      <div :style="styleObj">글자</div>
+      <div :style="[styleObj, styleObj2]">글자색</div>
+
+    </div>
     <script>
       const { createApp, ref } = Vue;
 
