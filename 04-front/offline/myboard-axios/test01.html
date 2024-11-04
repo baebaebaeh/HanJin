@@ -29,7 +29,7 @@
     function requestIdolList() {
       axios.get("http://192.168.210.40:8080/api/idol")
       .then(function (response) {
-        const idolList = response.data;
+        const idolList = response.data; 
         const outputDiv = document.getElementById("output");
           outputDiv.innerHTML = "";  // 초기화 
           idolList.forEach(function (idol) {
