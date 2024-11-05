@@ -7,7 +7,19 @@
   </head>
 
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <div v-for="person in items" :key="person.id">
+        {{person.name}}
+      </div>
+      <hr>
+      <!-- 아래의 방식으로 사도(지름길 타려고 하지마세요. 안됩니다.) -->
+      <div v-for="(person,index) in items" :key="index">
+        {{person.name}}
+      </div>
+
+
+
+    </div>
     <script>
       const { createApp, ref } = Vue;
 

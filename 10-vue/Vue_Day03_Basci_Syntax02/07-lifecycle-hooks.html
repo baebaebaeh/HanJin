@@ -7,13 +7,31 @@
   </head>
 
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <button @click="count++">증가</button>
+      {{count}}
+
+
+    </div>
     <script>
-      const { createApp, ref } = Vue;
+      const { createApp, ref, onMounted, onUpdated} = Vue;
 
       const app = createApp({
         setup() {
-          return {};
+          const count = ref(0)
+          onMounted(() => {
+            //초기에 API 통신을 위해서 보여주고 싶은 기본 화면 
+            console.log("연결완료")
+          })
+
+          onUpdated(()=>{
+            console.log('update')
+          })
+
+
+          return {
+            count
+          };
         },
       });
       app.mount("#app");

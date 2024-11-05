@@ -7,13 +7,42 @@
   </head>
 
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <p>{{count}}</p>
+      <button @click="count++">증가</button>
+
+      <hr>
+
+      <input type="text" v-model="message">
+      <p>{{messageLength}}</p>
+
+
+    </div>
     <script>
-      const { createApp, ref } = Vue;
+      const { createApp, ref, watch} = Vue;
 
       const app = createApp({
         setup() {
-          return {};
+          const count = ref(0)
+
+          const countWatch = watch(count, (newValue, oldValue)=>{
+            console.log(`new : ${newValue} / old : ${oldValue}`)
+          })
+
+          const message = ref("");
+          const messageLength = ref(0);
+
+          const messageWatch = watch(message, (newValue, oldValue)=>{
+            messageLength.value = newValue.length;
+          })
+
+          return {
+            count,
+            countWatch,
+            message,
+            messageWatch,
+            messageLength
+          };
         },
       });
       app.mount("#app");

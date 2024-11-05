@@ -8,32 +8,72 @@
 
   <body>
     <div id="app">
-      <!-- 그냥  -->
-      <div v-for="p in myArr">{{p.name}} / {{p.age}}</div>
-      <hr />
+      <div v-for="person in myArr">
+        {{person.name}} / {{person.age}}
+      </div>
+      <hr>
       <!-- 순서가 굉장히 중요하다. -->
-      <div v-for="(p, index) in myArr">{{index}} : {{p.name}} / {{p.age}}</div>
-      <hr />
-      <!-- 객체순회  -->
-      <div v-for="value in myObj">{{item}}</div>
-      <hr />
-      <div v-for="(value, key) in myObj">{{key}} : {{value}}</div>
-      <hr />
-      <div v-for="(value, key, index) in myObj">{{index}} - {{key}} : {{value}}</div>
-      <hr />
-
-      <!-- 여러요소를 동레벨로 반복 돌리고 싶다. -->
+      <div v-for="(person,index) in myArr">
+       {{index}} : {{person.name}} / {{person.age}}
+      </div>
+      <!-- 객체 -->
+      <hr>
+      <div v-for="item in myObj">
+        {{item}}
+      </div>
+      <hr>
+      <!-- 순서가 굉장히 중요하다. -->
+      <div v-for="(value, key) in myObj">
+        {{key}} : {{value}}
+      </div>
+      <div v-for="(value, key, index) in myObj">
+       {{index}} -> {{key}} : {{value}}
+      </div>
+      <hr>
+      <!-- 여러요소 동레벨로 -->
       <ul>
         <template v-for="item in myArr">
           <li>{{item.name}}</li>
           <li>{{item.age}}</li>
+          <hr>
         </template>
       </ul>
-      <!-- 중첩반복문 -->
-      <hr />
-      <ul v-for="item in myInfo">
-        <li v-for="friend in item.friends">{{item.name}}는 {{friend}}와 친구입니다.</li>
+      <!-- 중첩 반복문 -->
+      <ul v-for="person in myInfo">
+        <li v-for="friend in person.friends">
+          {{person.name}} 과 {{friend}}는 친구입니다.
+        </li>
       </ul>
+      <!-- 99단 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
     <script>
       const { createApp, ref } = Vue;
@@ -48,8 +88,7 @@
             name: "Cathy",
             age: 30,
           });
-
-          // nested v-for
+        
           const myInfo = ref([
             { name: "Alice", age: 20, friends: ["Bella", "Cathy", "Dan"] },
             { name: "Bella", age: 21, friends: ["Alice", "Cathy"] },
