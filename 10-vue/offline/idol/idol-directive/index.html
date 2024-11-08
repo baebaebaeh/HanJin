@@ -23,7 +23,7 @@
     <div id="app">
         <!-- 아이돌 목록 파트 -->
         <div id="list" v-if="currentView === 'list'">
-            <button @click="registIdolForm">등록ㅋ</button>
+            <button @click="registIdolForm">등록</button>
             <div v-for="idol in idols" :key="idol.no" @click="detailIdol(idol.no)">
                 <p>번호 : {{idol.no}} </p>
                 <p>이름 : {{idol.name}} </p>
